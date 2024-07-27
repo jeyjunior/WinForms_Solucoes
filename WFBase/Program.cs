@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WFServices
+namespace WFBase
 {
-    internal class Bootstrap
+    public static class Program
     {
     }
 }

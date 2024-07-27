@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\WinForms_Solucoes\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="SimpleInjector, Version=5.0.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
       <HintPath>..\WinForms_Solucoes\packages\SimpleInjector.5.4.6\lib\net461\SimpleInjector.dll</HintPath>
     </Reference>
@@ -44,14 +47,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bootstrap.cs" />
+    <Compile Include="BootstrapServices.cs" />
+    <Compile Include="Interfaces\IConfig.cs" />
+    <Compile Include="Interfaces\IPexelsService.cs" />
+    <Compile Include="Models\Config.cs" />
+    <Compile Include="Models\Foto.cs" />
+    <Compile Include="Models\PaginaFoto.cs" />
+    <Compile Include="Models\Source.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Interfaces\" />
-    <Folder Include="Models\" />
-    <Folder Include="Services\" />
+    <Compile Include="Services\PexelsService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

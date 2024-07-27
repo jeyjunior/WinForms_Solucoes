@@ -10,7 +10,10 @@ namespace WFGerenciadorArquivosGrid
         {
             Container = new Container();
 
-            WFBase.Bootstrap.Iniciar(Container);
+            WFBase.BootstrapBase.Iniciar(Container);
+            WFServices.BootstrapServices.Iniciar(Container);
+
+            Container.Verify();
         }
     }
 }
