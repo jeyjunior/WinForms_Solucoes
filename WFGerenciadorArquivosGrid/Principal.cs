@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WFServices.Interfaces;
+using WFServices.Models;
 
 namespace WFGerenciadorArquivosGrid
 {
@@ -24,8 +25,7 @@ namespace WFGerenciadorArquivosGrid
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var resposta = pexelsService.BuscarFotosAsync("Nature");
-            var resultado = resposta.Result;
+            var ret = pexelsService.ObterFotos();
         }
     }
 }

@@ -49,17 +49,20 @@
   <ItemGroup>
     <Compile Include="BootstrapServices.cs" />
     <Compile Include="Interfaces\IConfig.cs" />
-    <Compile Include="Interfaces\IPexelsService.cs" />
+    <Compile Include="Interfaces\Api\IPexelsService.cs" />
     <Compile Include="Models\Config.cs" />
-    <Compile Include="Models\Foto.cs" />
-    <Compile Include="Models\PaginaFoto.cs" />
-    <Compile Include="Models\Source.cs" />
+    <Compile Include="Models\Api\PexelsImagens.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\PexelsService.cs" />
+    <Compile Include="Services\Api\PexelsService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interfaces\Sistema\" />
+    <Folder Include="Models\Sistema\" />
+    <Folder Include="Services\Sistema\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

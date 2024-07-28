@@ -18,8 +18,6 @@ namespace WFServices
     public enum ApiPropriedade
     {
         ApiURL = 0,
-        ApiURLVersion = 1,
-        RequestTimeOutSec = 2,
-        ApiKey = 3,
+        ApiKey = 1,
     }
 }
