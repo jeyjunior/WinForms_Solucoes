@@ -38,7 +38,6 @@ namespace WFBase
             }
         }
 
-
         public string ObterPropriedade(ApiService apiService, ApiPropriedade apiPropriedade)
         {
             string ret = "";

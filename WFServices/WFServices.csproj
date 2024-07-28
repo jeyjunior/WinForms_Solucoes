@@ -50,19 +50,19 @@
     <Compile Include="BootstrapServices.cs" />
     <Compile Include="Interfaces\IConfig.cs" />
     <Compile Include="Interfaces\Api\IPexelsService.cs" />
+    <Compile Include="Interfaces\Sistema\IGerenciadorService.cs" />
     <Compile Include="Models\Config.cs" />
     <Compile Include="Models\Api\PexelsImagens.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Api\PexelsService.cs" />
+    <Compile Include="Services\Sistema\GerenciadorService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Interfaces\Sistema\" />
     <Folder Include="Models\Sistema\" />
-    <Folder Include="Services\Sistema\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
