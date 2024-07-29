@@ -10,14 +10,5 @@ namespace WFServices
     {
     }
 
-    public enum ApiService
-    {
-        Pexels = 0,
-    }
-
-    public enum ApiPropriedade
-    {
-        ApiURL = 0,
-        ApiKey = 1,
-    }
+   
 }

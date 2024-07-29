@@ -21,7 +21,6 @@ namespace WFServices
         {
             Container = container;
 
-            Container.Register<IConfig, Config>(Lifestyle.Singleton);
             Container.Register<IPexelsService, PexelsService>(Lifestyle.Singleton);
             Container.Register<IGerenciadorService, GerenciadorService>(Lifestyle.Singleton);
         }

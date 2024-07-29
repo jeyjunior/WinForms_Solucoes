@@ -7,7 +7,6 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 using WFBase.Interface;
-using WFServices;
 
 namespace WFBase
 {
@@ -38,6 +37,21 @@ namespace WFBase
             }
         }
 
+        public string ObterPropriedade(ConfigPropriedade configPropriedade)
+        {
+            string ret = "";
+
+            if (config == null)
+                ObterConfig();
+
+            if (config != null)
+            {
+                string parametro = configPropriedade.ToString();
+                ret = config[parametro]?.ToString();
+            }
+
+            return ret;
+        }
         public string ObterPropriedade(ApiService apiService, ApiPropriedade apiPropriedade)
         {
             string ret = "";

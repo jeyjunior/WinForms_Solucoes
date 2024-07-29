@@ -48,10 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BootstrapServices.cs" />
-    <Compile Include="Interfaces\IConfig.cs" />
     <Compile Include="Interfaces\Api\IPexelsService.cs" />
     <Compile Include="Interfaces\Sistema\IGerenciadorService.cs" />
-    <Compile Include="Models\Config.cs" />
+    <Compile Include="Models\Api\Imagem.cs" />
     <Compile Include="Models\Api\PexelsImagens.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -63,6 +62,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\Sistema\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WFBase\WFBase.csproj">
+      <Project>{5b5c496c-cecc-43bf-baef-f0ae3aba59ee}</Project>
+      <Name>WFBase</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,4 +1,5 @@
 ﻿using SimpleInjector;
+using WFBase.Interface;
 
 namespace WFBase
 {
@@ -9,6 +10,8 @@ namespace WFBase
         public static void Iniciar(Container container)
         {
             Container = container;
+
+            Container.Register<IConfig, Config>(Lifestyle.Singleton);
         }
     }
 }
