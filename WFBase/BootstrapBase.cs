@@ -1,4 +1,5 @@
 ﻿using SimpleInjector;
+using WFBase.Base;
 using WFBase.Interface;
 
 namespace WFBase
@@ -11,7 +12,8 @@ namespace WFBase
         {
             Container = container;
 
-            Container.Register<IConfig, Config>(Lifestyle.Singleton);
+            Container.Register<IConfigBase, ConfigBase>(Lifestyle.Singleton);
+            Container.Register<IRecursosBase, RecursosBase>(Lifestyle.Singleton);
         }
     }
 }

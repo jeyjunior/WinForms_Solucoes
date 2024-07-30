@@ -10,12 +10,12 @@ using WFBase.Interface;
 
 namespace WFBase
 {
-    public class Config : IConfig
+    public class ConfigBase : IConfigBase
     {
         private readonly string _configFilePath;
         private JObject config = null;
 
-        public Config()
+        public ConfigBase()
         {
             var projectRoot = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.FullName;
             _configFilePath = Path.Combine(projectRoot, "config.json");

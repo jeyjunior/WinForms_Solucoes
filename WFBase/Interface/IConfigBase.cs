@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WFBase.Interface
 {
-    public interface IConfig
+    public interface IConfigBase
     {
         string ObterPropriedade(ConfigPropriedade configPropriedade);
         string ObterPropriedade(ApiService apiService, ApiPropriedade apiPropriedade);

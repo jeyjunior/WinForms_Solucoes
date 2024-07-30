@@ -15,34 +15,34 @@ namespace WFServices.Services.Sistema
 {
     public class GerenciadorService : IGerenciadorService
     {
-        private readonly IConfig config;
+        private readonly IConfigBase config;
         private string diretorioPadrao;
 
         public GerenciadorService()
         {
-            config = BootstrapServices.Container.GetInstance<IConfig>();
+            config = BootstrapServices.Container.GetInstance<IConfigBase>();
 
             diretorioPadrao = config.ObterPropriedade(WFBase.ConfigPropriedade.DiretorioPadrao);
         }
 
-        public bool ObterImagem(ImagemDownloadRequest parametro)
+        public bool ObterImagem(Imagem parametro)
         {
             bool ret = false;
 
             if (parametro == null)
                 goto Sair;
 
-            parametro.Validation = new ValidationResult();
+            parametro.ValidationResult = new ValidationResult();
 
             if (parametro.Url.ObterValorOuPadrao("").Trim() == "")
             {
-                parametro.Validation.AddError("URL inválida.");
+                parametro.ValidationResult.AddError("URL inválida.");
                 goto Sair;
             }
 
             if (parametro.Nome.ObterValorOuPadrao("").Trim() == "")
             {
-                parametro.Validation.AddError("Nome inválido.");
+                parametro.ValidationResult.AddError("Nome inválido.");
                 goto Sair;
             }
 
@@ -50,21 +50,21 @@ namespace WFServices.Services.Sistema
             {
                 var imagemByte = BaixarImagem(parametro);
 
-                if (!parametro.Validation.IsValid)
+                if (!parametro.ValidationResult.IsValid)
                     goto Sair;
 
                 if (imagemByte.Length <= 0)
                 {
-                    parametro.Validation.AddError("Não foi possível obter a imagem através da url fornecida.");
+                    parametro.ValidationResult.AddError("Não foi possível obter a imagem através da url fornecida.");
                     goto Sair;
                 }
 
                 if (imagemByte != null)
-                    parametro.data = imagemByte;
+                    parametro.Data = imagemByte;
 
                 SalvarImagem(parametro);
 
-                if (!parametro.Validation.IsValid)
+                if (!parametro.ValidationResult.IsValid)
                     goto Sair;
 
                 ret = ValidarExistenciaArquivo(parametro);
@@ -72,16 +72,19 @@ namespace WFServices.Services.Sistema
             else
                 ret = true;
 
-            if (!parametro.Validation.IsValid)
+            if (!parametro.ValidationResult.IsValid)
                 goto Sair;
         Sair:;
             return ret;
         }
-        private string ObterDestinoArquivo(ImagemDownloadRequest parametro)
+        private string ObterDestinoArquivo(Imagem parametro)
         {
+            if (parametro.ValidarFormatoNome())
+                return "";
+
             return @diretorioPadrao + "\\" + parametro.Nome + parametro.Formato;
         }
-        private byte[] BaixarImagem(ImagemDownloadRequest parametro)
+        private byte[] BaixarImagem(Imagem parametro)
         {
             byte[] imagem = null;
 
@@ -95,15 +98,15 @@ namespace WFServices.Services.Sistema
             }
             catch (Exception ex)
             {
-                if (parametro.Validation == null)
-                    parametro.Validation = new ValidationResult();
+                if (parametro.ValidationResult == null)
+                    parametro.ValidationResult = new ValidationResult();
 
-                parametro.Validation.AddError(ex.Message);
+                parametro.ValidationResult.AddError(ex.Message);
             }
 
             return imagem;
         }
-        private bool ValidarExistenciaArquivo(ImagemDownloadRequest parametro) 
+        private bool ValidarExistenciaArquivo(Imagem parametro) 
         {
             bool ret = false;
 
@@ -114,15 +117,15 @@ namespace WFServices.Services.Sistema
             }
             catch (Exception ex)
             {
-                if (parametro.Validation == null)
-                    parametro.Validation = new ValidationResult();
+                if (parametro.ValidationResult == null)
+                    parametro.ValidationResult = new ValidationResult();
 
-                parametro.Validation.AddError(ex.Message);
+                parametro.ValidationResult.AddError(ex.Message);
             }
 
             return ret;
         }
-        private void SalvarImagem(ImagemDownloadRequest parametro)
+        private void SalvarImagem(Imagem parametro)
         {
             try
             {
@@ -134,14 +137,14 @@ namespace WFServices.Services.Sistema
 
                 string destino = ObterDestinoArquivo(parametro);
 
-                File.WriteAllBytes(destino, parametro.data);
+                File.WriteAllBytes(destino, parametro.Data);
             }
             catch (Exception ex)
             {
-                if (parametro.Validation == null)
-                    parametro.Validation = new ValidationResult();
+                if (parametro.ValidationResult == null)
+                    parametro.ValidationResult = new ValidationResult();
 
-                parametro.Validation.AddError(ex.Message);
+                parametro.ValidationResult.AddError(ex.Message);
             }
 
         Sair:;

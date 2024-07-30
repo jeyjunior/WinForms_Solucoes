@@ -28,44 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dtgArquivos = new System.Windows.Forms.DataGridView();
+            this.button1 = new System.Windows.Forms.Button();
+            this.colIDArquivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNomeArquivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIcone = new System.Windows.Forms.DataGridViewImageColumn();
-            this.button1 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgArquivos)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dtgArquivos
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToResizeColumns = false;
-            this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dtgArquivos.AllowUserToAddRows = false;
+            this.dtgArquivos.AllowUserToResizeColumns = false;
+            this.dtgArquivos.AllowUserToResizeRows = false;
+            this.dtgArquivos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtgArquivos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colIDArquivo,
             this.colNomeArquivo,
             this.colIcone});
-            this.dataGridView1.Location = new System.Drawing.Point(12, 78);
-            this.dataGridView1.MultiSelect = false;
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.Size = new System.Drawing.Size(560, 271);
-            this.dataGridView1.TabIndex = 0;
-            // 
-            // colNomeArquivo
-            // 
-            this.colNomeArquivo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colNomeArquivo.HeaderText = "Arquivo";
-            this.colNomeArquivo.Name = "colNomeArquivo";
-            this.colNomeArquivo.ReadOnly = true;
-            // 
-            // colIcone
-            // 
-            this.colIcone.HeaderText = "";
-            this.colIcone.MinimumWidth = 35;
-            this.colIcone.Name = "colIcone";
-            this.colIcone.ReadOnly = true;
-            this.colIcone.Width = 35;
+            this.dtgArquivos.Location = new System.Drawing.Point(12, 78);
+            this.dtgArquivos.MultiSelect = false;
+            this.dtgArquivos.Name = "dtgArquivos";
+            this.dtgArquivos.RowHeadersVisible = false;
+            this.dtgArquivos.RowHeadersWidth = 51;
+            this.dtgArquivos.Size = new System.Drawing.Size(560, 271);
+            this.dtgArquivos.TabIndex = 0;
             // 
             // button1
             // 
@@ -77,28 +64,56 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // colIDArquivo
+            // 
+            this.colIDArquivo.DataPropertyName = "IDArquivo";
+            this.colIDArquivo.HeaderText = "IDArquivo";
+            this.colIDArquivo.MinimumWidth = 2;
+            this.colIDArquivo.Name = "colIDArquivo";
+            this.colIDArquivo.ReadOnly = true;
+            this.colIDArquivo.Visible = false;
+            this.colIDArquivo.Width = 2;
+            // 
+            // colNomeArquivo
+            // 
+            this.colNomeArquivo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colNomeArquivo.DataPropertyName = "NomeArquivo";
+            this.colNomeArquivo.HeaderText = "NomeArquivo";
+            this.colNomeArquivo.Name = "colNomeArquivo";
+            this.colNomeArquivo.ReadOnly = true;
+            // 
+            // colIcone
+            // 
+            this.colIcone.DataPropertyName = "Icone";
+            this.colIcone.HeaderText = "";
+            this.colIcone.MinimumWidth = 35;
+            this.colIcone.Name = "colIcone";
+            this.colIcone.ReadOnly = true;
+            this.colIcone.Width = 35;
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(584, 361);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dtgArquivos);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Principal";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Principal";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgArquivos)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
+        private System.Windows.Forms.DataGridView dtgArquivos;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIDArquivo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNomeArquivo;
         private System.Windows.Forms.DataGridViewImageColumn colIcone;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button1;
     }
 }
 

@@ -12,7 +12,6 @@ namespace WFServices.Models
         [JsonProperty("photos")]
         public List<PexelsImagem> Fotos { get; set; }
     }
-
     public class PexelsImagem
     {
         [JsonProperty("id")]
@@ -48,7 +47,6 @@ namespace WFServices.Models
         [JsonProperty("alt")]
         public string alt { get; set; }
     }
-
     public class PexelsSource
     {
         [JsonProperty("original")]

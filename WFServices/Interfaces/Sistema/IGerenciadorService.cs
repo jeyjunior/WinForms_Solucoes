@@ -9,6 +9,6 @@ namespace WFServices.Interfaces.Sistema
 {
     public interface IGerenciadorService
     {
-        bool ObterImagem(ImagemDownloadRequest parametro);
+        bool ObterImagem(Imagem parametro);
     }
 }

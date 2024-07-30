@@ -4,21 +4,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using WFBase;
 using WFBase.Interface;
 using WFServices.Interfaces;
 using WFServices.Models;
+using WFServices.Models.Api;
 
 namespace WFServices.Services
 {
     public class PexelsService : IPexelsService
     {
-        private readonly IConfig config;
+        private readonly IConfigBase config;
 
         public PexelsService()
         {
-            config = BootstrapServices.Container.GetInstance<IConfig>();
+            config = BootstrapServices.Container.GetInstance<IConfigBase>();
         }
 
         private HttpClient ObterClient()
@@ -32,25 +35,64 @@ namespace WFServices.Services
             return client;
         }
 
-        public IEnumerable<PexelsImagem> ObterFotos()
+        public IEnumerable<Imagem> ObterImagens()
         {
-            var fotos = new List<PexelsImagem>();
+            var imagens = new List<Imagem>();
 
             using (var client = ObterClient())
             {
                 string url = config.ObterPropriedade(ApiService.Pexels, ApiPropriedade.ApiURL);
 
-                var resposta = client.GetAsync(new Uri(url + "curated?page=1&per_page=1"));
+                var resposta = client.GetAsync(new Uri(url + "search?query=nature&per_page=10"));
                 var resultado = resposta.Result;
                 var resultadoProcessado = ProcessResult<PexelsImagens>(resultado);
 
                 if (resultadoProcessado.IsCompleted)
                 {
-                    fotos = resultadoProcessado.Result.Fotos.ToList();
+                    var pexelsImagens = resultadoProcessado.Result.Fotos.ToList();
+                    imagens = ConverterParaImagem(pexelsImagens).ToList();
                 }
             }
 
-            return fotos;
+            return imagens;
+        }
+
+        private IEnumerable<Imagem> ConverterParaImagem(List<PexelsImagem> pexelsImagem)
+        {
+            var imagens = new List<Imagem>();
+
+            try
+            {
+                if (pexelsImagem == null)
+                    goto Sair;
+
+                if (pexelsImagem.Count <= 0)
+                    goto Sair;
+
+                imagens = pexelsImagem.Select(p => new Imagem
+                {
+                    ID = p.id,
+                    Alt = p.alt,
+                    Autor = p.photographer,
+                    AutorID = p.photographerId,
+                    AutorURL = p.photographerUrl,
+                    Url = p.url,
+                    Height = p.height,
+                    Width = p.width,
+                    Formato = ".jpg",
+                    Data = null,
+                    Nome = p.url.Replace("https://www.pexels.com/photo/", ""),
+
+                }).ToList();
+            }
+            catch
+            {
+                
+            }
+
+        Sair:;
+
+            return imagens;
         }
 
         private async Task<T> ProcessResult<T>(HttpResponseMessage response)
