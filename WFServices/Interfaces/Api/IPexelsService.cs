@@ -7,6 +7,6 @@ namespace WFServices.Interfaces
 {
     public interface IPexelsService
     {
-        IEnumerable<Imagem> ObterImagens();
+        IEnumerable<Imagem> PesquisarImagens(string query);
     }
 }

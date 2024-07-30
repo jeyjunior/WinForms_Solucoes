@@ -34,18 +34,6 @@ namespace WFServices.Services.Sistema
 
             parametro.ValidationResult = new ValidationResult();
 
-            if (parametro.Url.ObterValorOuPadrao("").Trim() == "")
-            {
-                parametro.ValidationResult.AddError("URL inválida.");
-                goto Sair;
-            }
-
-            if (parametro.Nome.ObterValorOuPadrao("").Trim() == "")
-            {
-                parametro.ValidationResult.AddError("Nome inválido.");
-                goto Sair;
-            }
-
             if (!ValidarExistenciaArquivo(parametro))
             {
                 var imagemByte = BaixarImagem(parametro);
@@ -79,8 +67,11 @@ namespace WFServices.Services.Sistema
         }
         private string ObterDestinoArquivo(Imagem parametro)
         {
-            if (parametro.ValidarFormatoNome())
+            if (!parametro.ValidarFormatoNome())
                 return "";
+
+            if(parametro.Nome.EndsWith("\\"))
+                parametro.Nome = parametro.Nome.Substring(parametro.Nome.Length - 1);
 
             return @diretorioPadrao + "\\" + parametro.Nome + parametro.Formato;
         }

@@ -31,17 +31,6 @@ namespace WFGerenciadorArquivosGrid
             recursosBase = Bootstrap.Container.GetInstance<IRecursosBase>();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            imagens = pexelsService.ObterImagens().ToList();
-
-            if (imagens.Count() <= 0)
-                goto Sair;
-
-            BindGrid();
-            Sair:;
-        }
-
         private void BindGrid()
         {
             var resultado = imagens.Select(i => new
@@ -65,6 +54,26 @@ namespace WFGerenciadorArquivosGrid
             else
             {
                 dtgArquivos.DataSource = resultado;
+            }
+        }
+
+        private void btnImagens_Click(object sender, EventArgs e)
+        {
+            string query = txtQuery.Text;
+            imagens = pexelsService.PesquisarImagens(query).ToList();
+
+            if (imagens.Count() <= 0)
+                goto Sair;
+
+            BindGrid();
+            Sair:;
+        }
+
+        private void btnBaixar_Click(object sender, EventArgs e)
+        {
+            foreach (var img in imagens)
+            {
+                var ret = gerenciadorService.ObterImagem(img);
             }
         }
     }

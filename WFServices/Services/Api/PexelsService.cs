@@ -35,7 +35,7 @@ namespace WFServices.Services
             return client;
         }
 
-        public IEnumerable<Imagem> ObterImagens()
+        public IEnumerable<Imagem> PesquisarImagens(string query)
         {
             var imagens = new List<Imagem>();
 
@@ -43,7 +43,8 @@ namespace WFServices.Services
             {
                 string url = config.ObterPropriedade(ApiService.Pexels, ApiPropriedade.ApiURL);
 
-                var resposta = client.GetAsync(new Uri(url + "search?query=nature&per_page=10"));
+                int perPage = new Random().Next(10, 30);
+                var resposta = client.GetAsync(new Uri(url + $"search?query={query}&per_page={perPage}"));
                 var resultado = resposta.Result;
                 var resultadoProcessado = ProcessResult<PexelsImagens>(resultado);
 
@@ -76,7 +77,7 @@ namespace WFServices.Services
                     Autor = p.photographer,
                     AutorID = p.photographerId,
                     AutorURL = p.photographerUrl,
-                    Url = p.url,
+                    Url = p.source.original,
                     Height = p.height,
                     Width = p.width,
                     Formato = ".jpg",
