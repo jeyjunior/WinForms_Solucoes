@@ -11,6 +11,7 @@ using WFBase.Base;
 using WFBase.Interface;
 using WFServices.Interfaces.Sistema;
 using WFServices.Models.Api;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace WFServices.Services.Sistema
 {
@@ -19,7 +20,6 @@ namespace WFServices.Services.Sistema
         private readonly IConfigBase config;
         private string diretorioPadrao;
 
-        private Queue<Imagem> imagens;
         private Thread Thread;
 
         public GerenciadorService()
@@ -31,35 +31,28 @@ namespace WFServices.Services.Sistema
 
         public void ObterImagensAsync(List<Imagem> parametros, EventHandler e, SynchronizationContext synchronizationContext)
         {
-            if (imagens == null)
-                imagens = new Queue<Imagem>();
-
-            parametros.ForEach(i => imagens.Enqueue(i));
-
             if (Thread == null || !Thread.IsAlive)
             {
                 Thread = new Thread(() =>
                 {
-                ProximaImagem:;
+                    var imagens = new Queue<Imagem>();
+                    parametros = parametros.OrderBy(i => i.Nome).ToList();
+                    parametros.ForEach(i => imagens.Enqueue(i));
 
-                    if (imagens.Count <= 0)
-                        goto Sair;
-
-                    var img = imagens.Dequeue();
-
-                    var ret = ObterImagem(img);
-
-                    if (ret)
+                    while (imagens.Count > 0) 
                     {
-                        if (e != null)
+                        var img = imagens.Dequeue();
+
+                        var ret = ObterImagem(img);
+
+                        if (ret)
                         {
-                            synchronizationContext.Post(_ => e.Invoke(img, null), null);
+                            if (e != null)
+                            {
+                                synchronizationContext.Post(_ => e.Invoke(img, null), null);
+                            }
                         }
                     }
-
-                    goto ProximaImagem;
-
-                Sair:;
                 });
 
                 Thread.Start();

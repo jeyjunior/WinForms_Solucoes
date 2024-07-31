@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WFBase.Base;
 using WFBase.Interface;
 using WFServices.Interfaces;
 using WFServices.Interfaces.Sistema;
@@ -76,7 +77,6 @@ namespace WFGerenciadorArquivosGrid
             var synchronizationContext = SynchronizationContext.Current;
             gerenciadorService.ObterImagensAsync(imagens, new EventHandler((x, y) => AtualizarInfoDownload((Imagem)x)), synchronizationContext);
         }
-
 
         private void AtualizarInfoDownload(Imagem img)
         {
