@@ -4,7 +4,9 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WFBase.Interface;
@@ -37,7 +39,7 @@ namespace WFGerenciadorArquivosGrid
             {
                 IDArquivo = i.ID,
                 NomeArquivo = i.Nome,
-                Icone = recursosBase.ObterRecurso(WFBase.Base.Recurso.download),
+                Icone = i.ImagemBaixada ? recursosBase.ObterRecurso(WFBase.Base.Recurso.download_done) : recursosBase.ObterRecurso(WFBase.Base.Recurso.download),
             }).ToList();
 
             if(resultado.Count <= 0)
@@ -71,10 +73,19 @@ namespace WFGerenciadorArquivosGrid
 
         private void btnBaixar_Click(object sender, EventArgs e)
         {
-            foreach (var img in imagens)
-            {
-                var ret = gerenciadorService.ObterImagem(img);
-            }
+            var synchronizationContext = SynchronizationContext.Current;
+            gerenciadorService.ObterImagensAsync(imagens, new EventHandler((x, y) => AtualizarInfoDownload((Imagem)x)), synchronizationContext);
+        }
+
+
+        private void AtualizarInfoDownload(Imagem img)
+        {
+            if (img == null)
+                return;
+
+            img.ImagemBaixada = true;
+
+            BindGrid();
         }
     }
 }

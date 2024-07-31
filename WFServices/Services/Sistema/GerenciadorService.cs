@@ -5,7 +5,8 @@ using System.Linq;
 using System.Net;
 using System.Security.Policy;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
+using System.Windows.Forms;
 using WFBase.Base;
 using WFBase.Interface;
 using WFServices.Interfaces.Sistema;
@@ -18,11 +19,51 @@ namespace WFServices.Services.Sistema
         private readonly IConfigBase config;
         private string diretorioPadrao;
 
+        private Queue<Imagem> imagens;
+        private Thread Thread;
+
         public GerenciadorService()
         {
             config = BootstrapServices.Container.GetInstance<IConfigBase>();
 
             diretorioPadrao = config.ObterPropriedade(WFBase.ConfigPropriedade.DiretorioPadrao);
+        }
+
+        public void ObterImagensAsync(List<Imagem> parametros, EventHandler e, SynchronizationContext synchronizationContext)
+        {
+            if (imagens == null)
+                imagens = new Queue<Imagem>();
+
+            parametros.ForEach(i => imagens.Enqueue(i));
+
+            if (Thread == null || !Thread.IsAlive)
+            {
+                Thread = new Thread(() =>
+                {
+                ProximaImagem:;
+
+                    if (imagens.Count <= 0)
+                        goto Sair;
+
+                    var img = imagens.Dequeue();
+
+                    var ret = ObterImagem(img);
+
+                    if (ret)
+                    {
+                        if (e != null)
+                        {
+                            synchronizationContext.Post(_ => e.Invoke(img, null), null);
+                        }
+                    }
+
+                    goto ProximaImagem;
+
+                Sair:;
+                });
+
+                Thread.Start();
+            }
         }
 
         public bool ObterImagem(Imagem parametro)
@@ -70,8 +111,8 @@ namespace WFServices.Services.Sistema
             if (!parametro.ValidarFormatoNome())
                 return "";
 
-            if(parametro.Nome.EndsWith("\\"))
-                parametro.Nome = parametro.Nome.Substring(parametro.Nome.Length - 1);
+            if(parametro.Nome.EndsWith("/"))
+                parametro.Nome = parametro.Nome.Substring(0, parametro.Nome.Length - 1);
 
             return @diretorioPadrao + "\\" + parametro.Nome + parametro.Formato;
         }

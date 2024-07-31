@@ -34,7 +34,6 @@ namespace WFServices.Services
            
             return client;
         }
-
         public IEnumerable<Imagem> PesquisarImagens(string query)
         {
             var imagens = new List<Imagem>();
@@ -57,7 +56,6 @@ namespace WFServices.Services
 
             return imagens;
         }
-
         private IEnumerable<Imagem> ConverterParaImagem(List<PexelsImagem> pexelsImagem)
         {
             var imagens = new List<Imagem>();
@@ -95,7 +93,6 @@ namespace WFServices.Services
 
             return imagens;
         }
-
         private async Task<T> ProcessResult<T>(HttpResponseMessage response)
         {
             response.EnsureSuccessStatusCode();
