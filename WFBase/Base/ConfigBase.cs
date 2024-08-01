@@ -19,6 +19,7 @@ namespace WFBase
         {
             var projectRoot = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.FullName;
             _configFilePath = Path.Combine(projectRoot, "config.json");
+            //_configFilePath = Path.Combine(projectRoot, "configModel.json");
         }
 
         private void ObterConfig()

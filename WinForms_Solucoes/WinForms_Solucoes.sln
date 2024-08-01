@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WFGerenciadorArquivosGrid",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WFServices", "..\WFServices\WFServices.csproj", "{B6970DA4-102E-470A-9C4D-9E0B9E646742}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WFGerenciadorDeGastos", "WFGerenciadorDeGastos\WFGerenciadorDeGastos.csproj", "{CAB36038-7D58-47E7-86D3-51BA249F33E0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{B6970DA4-102E-470A-9C4D-9E0B9E646742}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6970DA4-102E-470A-9C4D-9E0B9E646742}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6970DA4-102E-470A-9C4D-9E0B9E646742}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAB36038-7D58-47E7-86D3-51BA249F33E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAB36038-7D58-47E7-86D3-51BA249F33E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAB36038-7D58-47E7-86D3-51BA249F33E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAB36038-7D58-47E7-86D3-51BA249F33E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

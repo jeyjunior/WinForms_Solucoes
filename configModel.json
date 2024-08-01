@@ -1,0 +1,7 @@
+// Modelo de configuração para ser utilizado na pasta raiz da solução
+
+{
+  "DiretorioPadrao": "C:\\Arquivos\\Imagens",
+  "PexelsApiURL": "https://api.pexels.com/v1/",
+  "PexelsApiKey": "" // Inserir sua API Key do Pexels
+}
