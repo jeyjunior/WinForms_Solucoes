@@ -85,6 +85,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\WFBaseDados\WFBaseDados.csproj">
+      <Project>{22ff27ca-0cc5-4dbf-945a-3c8432ca8f51}</Project>
+      <Name>WFBaseDados</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WFBase\WFBase.csproj">
       <Project>{5b5c496c-cecc-43bf-baef-f0ae3aba59ee}</Project>
       <Name>WFBase</Name>
