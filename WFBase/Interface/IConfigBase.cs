@@ -8,7 +8,8 @@ namespace WFBase.Interface
 {
     public interface IConfigBase
     {
-        string ObterPropriedade(ConfigPropriedade configPropriedade);
-        string ObterPropriedade(ApiService apiService, ApiPropriedade apiPropriedade);
+        string ObterPropriedade(ConfigSistema configSistema);
+        string ObterPropriedade(ConfigBaseDados configBaseDados);
+        string ObterPropriedade(ConfigApis configApis);
     }
 }

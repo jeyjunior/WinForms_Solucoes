@@ -25,10 +25,8 @@ namespace WFServices.Services.Sistema
         public GerenciadorService()
         {
             config = BootstrapServices.Container.GetInstance<IConfigBase>();
-
-            diretorioPadrao = config.ObterPropriedade(WFBase.ConfigPropriedade.DiretorioPadrao);
+            diretorioPadrao = config.ObterPropriedade(WFBase.ConfigSistema.DiretorioPadrao);
         }
-
         public void ObterImagensAsync(List<Imagem> parametros, EventHandler e, SynchronizationContext synchronizationContext)
         {
             if (Thread == null || !Thread.IsAlive)
@@ -58,7 +56,6 @@ namespace WFServices.Services.Sistema
                 Thread.Start();
             }
         }
-
         public bool ObterImagem(Imagem parametro)
         {
             bool ret = false;

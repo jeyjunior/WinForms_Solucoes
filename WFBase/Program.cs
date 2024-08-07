@@ -10,19 +10,19 @@ namespace WFBase
     {
     }
 
-    public enum ConfigPropriedade
+    public enum ConfigSistema
     {
         DiretorioPadrao = 0,
     }
 
-    public enum ApiService
+    public enum ConfigBaseDados
     {
-        Pexels = 1,
+        StringConexao = 0,
     }
 
-    public enum ApiPropriedade
+    public enum ConfigApis
     {
-        ApiURL = 0,
-        ApiKey = 1,
+        PexelsURL = 0,
+        PexelsKey = 1,
     }
 }

@@ -23,12 +23,11 @@ namespace WFServices.Services
         {
             config = BootstrapServices.Container.GetInstance<IConfigBase>();
         }
-
         private HttpClient ObterClient()
         {
             var client = new HttpClient();
 
-            string key = config.ObterPropriedade(ApiService.Pexels, ApiPropriedade.ApiKey);
+            string key = config.ObterPropriedade(ConfigApis.PexelsKey);
 
             client.DefaultRequestHeaders.Add("Authorization", key);
            
@@ -40,7 +39,7 @@ namespace WFServices.Services
 
             using (var client = ObterClient())
             {
-                string url = config.ObterPropriedade(ApiService.Pexels, ApiPropriedade.ApiURL);
+                string url = config.ObterPropriedade(ConfigApis.PexelsURL);
 
                 int perPage = new Random().Next(10, 30);
                 var resposta = client.GetAsync(new Uri(url + $"search?query={query}&per_page={perPage}"));

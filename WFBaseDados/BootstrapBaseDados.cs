@@ -14,18 +14,14 @@ namespace WFBaseDados
     public static class BootstrapBaseDados
     {
         public static Container Container { get; private set; }
+
         public static void Iniciar(Container container)
         {
             Container = container;
 
 
 
-            IniciarBaseDados();
-        }
-
-        private static void IniciarBaseDados()
-        {
-
+            Program.IniciarBaseDados();
         }
     }
 }

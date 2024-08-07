@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,19 +8,19 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 using WFBase.Interface;
+using WFBase.Models;
 
 namespace WFBase
 {
     public class ConfigBase : IConfigBase
     {
         private readonly string _configFilePath;
-        private JObject config = null;
+        private Config config = null;
 
         public ConfigBase()
         {
             var projectRoot = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.Parent.FullName;
             _configFilePath = Path.Combine(projectRoot, "config.json");
-            //_configFilePath = Path.Combine(projectRoot, "configModel.json");
         }
 
         private void ObterConfig()
@@ -28,8 +29,8 @@ namespace WFBase
             {
                 if (File.Exists(_configFilePath))
                 {
-                    var json = File.ReadAllText(_configFilePath);
-                    this.config = JObject.Parse(json);
+                    string json = File.ReadAllText(_configFilePath);
+                    config = JsonConvert.DeserializeObject<Config>(json);
                 }
             }
             catch
@@ -37,33 +38,59 @@ namespace WFBase
 
             }
         }
-
-        public string ObterPropriedade(ConfigPropriedade configPropriedade)
+        public string ObterPropriedade(ConfigSistema configSistema)
         {
             string ret = "";
 
             if (config == null)
                 ObterConfig();
 
-            if (config != null)
+            switch (configSistema)
             {
-                string parametro = configPropriedade.ToString();
-                ret = config[parametro]?.ToString();
+                case ConfigSistema.DiretorioPadrao:
+                    ret = config.Sistema.DiretorioPadrao;
+                    break;
+                default:
+                    break;
             }
 
             return ret;
         }
-        public string ObterPropriedade(ApiService apiService, ApiPropriedade apiPropriedade)
+        public string ObterPropriedade(ConfigBaseDados configBaseDados)
+        {
+            string ret = "";
+
+            if (config == null)
+                ObterConfig();
+
+            switch (configBaseDados)
+            {
+                case ConfigBaseDados.StringConexao:
+                    ret = config.BaseDados.StringConexao;
+                    break;
+                default:
+                    break;
+            }
+
+            return ret;
+        }
+        public string ObterPropriedade(ConfigApis configApis)
         {
             string ret = "";
 
             if(config == null)
                 ObterConfig();
 
-            if (config != null)
+            switch (configApis)
             {
-                string parametro = apiService.ToString() + apiPropriedade.ToString();
-                ret = config[parametro]?.ToString();
+                case ConfigApis.PexelsURL:
+                    ret = config.Pexels.URL;
+                    break;
+                case ConfigApis.PexelsKey:
+                    ret = config.Pexels.Key;
+                    break;
+                default:
+                    break;
             }
 
             return ret;
