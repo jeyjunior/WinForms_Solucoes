@@ -38,6 +38,7 @@ namespace WFBase
 
             }
         }
+
         public string ObterPropriedade(ConfigSistema configSistema)
         {
             string ret = "";
@@ -56,24 +57,7 @@ namespace WFBase
 
             return ret;
         }
-        public string ObterPropriedade(ConfigBaseDados configBaseDados)
-        {
-            string ret = "";
 
-            if (config == null)
-                ObterConfig();
-
-            switch (configBaseDados)
-            {
-                case ConfigBaseDados.StringConexao:
-                    ret = config.BaseDados.StringConexao;
-                    break;
-                default:
-                    break;
-            }
-
-            return ret;
-        }
         public string ObterPropriedade(ConfigApis configApis)
         {
             string ret = "";

@@ -15,11 +15,6 @@ namespace WFBase
         DiretorioPadrao = 0,
     }
 
-    public enum ConfigBaseDados
-    {
-        StringConexao = 0,
-    }
-
     public enum ConfigApis
     {
         PexelsURL = 0,

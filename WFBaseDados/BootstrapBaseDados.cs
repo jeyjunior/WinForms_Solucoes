@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +8,10 @@ using WFBase.Interface;
 using WFBase;
 using System.Data.Common;
 using System.IO;
+using WFBaseDados.Entidades.Config;
+using SimpleInjector;
+using WFBaseDados.Interfaces;
+
 namespace WFBaseDados
 {
     public static class BootstrapBaseDados
@@ -19,7 +22,7 @@ namespace WFBaseDados
         {
             Container = container;
 
-
+            Container.Register<IConfiguracaoBancoDados, ConfiguracaoBancoDados>(Lifestyle.Singleton);
 
             Program.IniciarBaseDados();
         }

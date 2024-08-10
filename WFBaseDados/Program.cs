@@ -8,6 +8,8 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using WFBase.Base;
+using WFBaseDados.Entidades.Config;
+using WFBaseDados.Interfaces;
 
 namespace WFBaseDados
 {
@@ -16,21 +18,9 @@ namespace WFBaseDados
         public static bool IniciarBaseDados()
         {
             ValidationResult validation = new ValidationResult();
-            
-            CriarConexao(validation);
-            CriarTabelasBase(validation);
-
+            var configuracaoBancoDados = BootstrapBaseDados.Container.GetInstance<IConfiguracaoBancoDados>();
+            var teste = configuracaoBancoDados.ObterStringConexao();
             return validation.Errors.Count() <= 0;
-        }
-
-        private static void CriarConexao(ValidationResult validation)
-        {
-
-        }
-
-        private static void CriarTabelasBase(ValidationResult validation)
-        {
-
         }
     }
 }

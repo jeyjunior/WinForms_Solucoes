@@ -1,0 +1,3 @@
+{
+	"StringConexao": "Data Source=nome_do_servidor;Initial Catalog=nome_do_banco;User ID=seu_usuario;Password=sua_senha"
+}

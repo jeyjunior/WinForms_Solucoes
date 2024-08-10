@@ -7,17 +7,18 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using WFBase;
 using WFBase.Base;
 using WFBase.Interface;
 using WFServices.Interfaces.Sistema;
 using WFServices.Models.Api;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace WFServices.Services.Sistema
 {
     public class GerenciadorService : IGerenciadorService
     {
         private readonly IConfigBase config;
+
         private string diretorioPadrao;
 
         private Thread Thread;
@@ -25,8 +26,9 @@ namespace WFServices.Services.Sistema
         public GerenciadorService()
         {
             config = BootstrapServices.Container.GetInstance<IConfigBase>();
-            diretorioPadrao = config.ObterPropriedade(WFBase.ConfigSistema.DiretorioPadrao);
+            diretorioPadrao = config.ObterPropriedade(ConfigSistema.DiretorioPadrao);
         }
+
         public void ObterImagensAsync(List<Imagem> parametros, EventHandler e, SynchronizationContext synchronizationContext)
         {
             if (Thread == null || !Thread.IsAlive)
@@ -56,6 +58,7 @@ namespace WFServices.Services.Sistema
                 Thread.Start();
             }
         }
+
         public bool ObterImagem(Imagem parametro)
         {
             bool ret = false;
@@ -96,6 +99,7 @@ namespace WFServices.Services.Sistema
         Sair:;
             return ret;
         }
+
         private string ObterDestinoArquivo(Imagem parametro)
         {
             if (!parametro.ValidarFormatoNome())
@@ -106,6 +110,7 @@ namespace WFServices.Services.Sistema
 
             return @diretorioPadrao + "\\" + parametro.Nome + parametro.Formato;
         }
+        
         private byte[] BaixarImagem(Imagem parametro)
         {
             byte[] imagem = null;
@@ -128,6 +133,7 @@ namespace WFServices.Services.Sistema
 
             return imagem;
         }
+
         private bool ValidarExistenciaArquivo(Imagem parametro) 
         {
             bool ret = false;
@@ -147,6 +153,7 @@ namespace WFServices.Services.Sistema
 
             return ret;
         }
+
         private void SalvarImagem(Imagem parametro)
         {
             try

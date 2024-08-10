@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WFBaseDados;
+using SimpleInjector;
 
 namespace WFGerenciadorDeGastos
 {
@@ -15,12 +16,11 @@ namespace WFGerenciadorDeGastos
         [STAThread]
         static void Main()
         {
-            BootstrapBaseDados.Iniciar(new System.ComponentModel.Container());
+            BootstrapBaseDados.Iniciar(new Container());
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Principal());
-
         }
     }
 }
