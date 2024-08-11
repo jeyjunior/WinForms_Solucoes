@@ -16,7 +16,7 @@ namespace WFGerenciadorDeGastos
         [STAThread]
         static void Main()
         {
-            BootstrapBaseDados.Iniciar(new Container());
+            Bootstrap.Iniciar();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace WFBaseDados.Interfaces
 {
-    internal interface IConfiguracaoBancoDados
+    public interface IRepositorio <T>
     {
-        string ObterStringConexao();
-        IEnumerable<Parametros> ObterParametros();
+        IEnumerable<T> ObterLista();
     }
 }

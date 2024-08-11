@@ -11,6 +11,7 @@ using System.IO;
 using WFBaseDados.Entidades.Config;
 using SimpleInjector;
 using WFBaseDados.Interfaces;
+using WFBaseDados.Repositorios;
 
 namespace WFBaseDados
 {
@@ -23,8 +24,7 @@ namespace WFBaseDados
             Container = container;
 
             Container.Register<IConfiguracaoBancoDados, ConfiguracaoBancoDados>(Lifestyle.Singleton);
-
-            Program.IniciarBaseDados();
+            Container.Register<IWFTesteRepositorio, WFTesteRepositorio>(Lifestyle.Singleton);
         }
     }
 }

@@ -15,12 +15,10 @@ namespace WFBaseDados
 {
     internal static class Program
     {
-        public static bool IniciarBaseDados()
+        public static string ObterConexao()
         {
-            ValidationResult validation = new ValidationResult();
             var configuracaoBancoDados = BootstrapBaseDados.Container.GetInstance<IConfiguracaoBancoDados>();
-            var teste = configuracaoBancoDados.ObterStringConexao();
-            return validation.Errors.Count() <= 0;
+            return configuracaoBancoDados.ObterStringConexao();
         }
     }
 }

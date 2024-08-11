@@ -55,21 +55,6 @@ namespace WFBaseDados.Entidades.Config
             CarregarConfiguracao();
             return config.StringConexao;
         }
-
-        public IEnumerable<Parametros> ObterParametros()
-        {
-            using (IDbConnection dbConnection = new SqlConnection(ObterStringConexao()))
-            {
-                string sql = "SELECT * FROM Parametros";
-                return dbConnection.Query<Parametros>(sql).ToList();
-            }
-        }
     }
 }
 
-
-public class Parametros
-{
-    public string Propriedade { get; set; }
-    public string Valor { get; set; }
-}

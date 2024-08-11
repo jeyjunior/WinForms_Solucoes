@@ -80,9 +80,17 @@
     <Compile Include="Base.cs" />
     <Compile Include="BootstrapBaseDados.cs" />
     <Compile Include="Entidades\Config\ConfiguracaoBancoDados.cs" />
-    <Compile Include="Interfaces\IConfiguracaoBancoDados.cs" />
+    <Compile Include="Entidades\GerenciadorDeGastos\WFCategoria.cs" />
+    <Compile Include="Entidades\GerenciadorDeGastos\WFMetodoPagamento.cs" />
+    <Compile Include="Entidades\GerenciadorDeGastos\WFRegistroDebitos.cs" />
+    <Compile Include="Entidades\WFTeste.cs" />
+    <Compile Include="Interfaces\Config\IConfiguracaoBancoDados.cs" />
+    <Compile Include="Interfaces\IRepositorio.cs" />
+    <Compile Include="Interfaces\IWFTesteRepositorio.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositorios\Repositorio.cs" />
+    <Compile Include="Repositorios\WFTesteRepositorio.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WFBase\WFBase.csproj">
@@ -94,12 +102,12 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Repositorios\" />
-    <Folder Include="SQLServer\Querys\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SQLServer\Querys\CriacaoTabelas.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
