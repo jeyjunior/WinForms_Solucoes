@@ -66,18 +66,18 @@ namespace WFServices.Services.Sistema
             if (parametro == null)
                 goto Sair;
 
-            parametro.ValidationResult = new ValidationResult();
+            parametro.Validacao = new Validacao();
 
             if (!ValidarExistenciaArquivo(parametro))
             {
                 var imagemByte = BaixarImagem(parametro);
 
-                if (!parametro.ValidationResult.IsValid)
+                if (!parametro.Validacao.ehValido)
                     goto Sair;
 
                 if (imagemByte.Length <= 0)
                 {
-                    parametro.ValidationResult.AddError("Não foi possível obter a imagem através da url fornecida.");
+                    parametro.Validacao.AddErro("Não foi possível obter a imagem através da url fornecida.");
                     goto Sair;
                 }
 
@@ -86,7 +86,7 @@ namespace WFServices.Services.Sistema
 
                 SalvarImagem(parametro);
 
-                if (!parametro.ValidationResult.IsValid)
+                if (!parametro.Validacao.ehValido)
                     goto Sair;
 
                 ret = ValidarExistenciaArquivo(parametro);
@@ -94,7 +94,7 @@ namespace WFServices.Services.Sistema
             else
                 ret = true;
 
-            if (!parametro.ValidationResult.IsValid)
+            if (!parametro.Validacao.ehValido)
                 goto Sair;
         Sair:;
             return ret;
@@ -125,10 +125,10 @@ namespace WFServices.Services.Sistema
             }
             catch (Exception ex)
             {
-                if (parametro.ValidationResult == null)
-                    parametro.ValidationResult = new ValidationResult();
+                if (parametro.Validacao == null)
+                    parametro.Validacao = new Validacao();
 
-                parametro.ValidationResult.AddError(ex.Message);
+                parametro.Validacao.AddErro(ex.Message);
             }
 
             return imagem;
@@ -145,10 +145,10 @@ namespace WFServices.Services.Sistema
             }
             catch (Exception ex)
             {
-                if (parametro.ValidationResult == null)
-                    parametro.ValidationResult = new ValidationResult();
+                if (parametro.Validacao == null)
+                    parametro.Validacao = new Validacao();
 
-                parametro.ValidationResult.AddError(ex.Message);
+                parametro.Validacao.AddErro(ex.Message);
             }
 
             return ret;
@@ -170,10 +170,10 @@ namespace WFServices.Services.Sistema
             }
             catch (Exception ex)
             {
-                if (parametro.ValidationResult == null)
-                    parametro.ValidationResult = new ValidationResult();
+                if (parametro.Validacao == null)
+                    parametro.Validacao = new Validacao();
 
-                parametro.ValidationResult.AddError(ex.Message);
+                parametro.Validacao.AddErro(ex.Message);
             }
 
         Sair:;

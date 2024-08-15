@@ -86,10 +86,12 @@
     <Compile Include="Entidades\WFTeste.cs" />
     <Compile Include="Interfaces\Config\IConfiguracaoBancoDados.cs" />
     <Compile Include="Interfaces\IRepositorio.cs" />
+    <Compile Include="Interfaces\IWFCategoriaRepositorio.cs" />
     <Compile Include="Interfaces\IWFTesteRepositorio.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositorios\Repositorio.cs" />
+    <Compile Include="Repositorios\WFCategoriaRepositorio.cs" />
     <Compile Include="Repositorios\WFTesteRepositorio.cs" />
   </ItemGroup>
   <ItemGroup>

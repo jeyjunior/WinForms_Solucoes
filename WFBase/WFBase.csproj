@@ -51,7 +51,7 @@
   <ItemGroup>
     <Compile Include="Base\Extensao.cs" />
     <Compile Include="Base\RecursosBase.cs" />
-    <Compile Include="Base\ValidationResult.cs" />
+    <Compile Include="Base\Validacao.cs" />
     <Compile Include="BootstrapBase.cs" />
     <Compile Include="Base\ConfigBase.cs" />
     <Compile Include="Interface\IConfigBase.cs" />

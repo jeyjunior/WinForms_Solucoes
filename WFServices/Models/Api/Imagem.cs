@@ -25,65 +25,65 @@ namespace WFServices.Models.Api
         public byte[] Data { get; set; }
         public bool ImagemBaixada { get; set; }
 
-        public ValidationResult ValidationResult { get; set; }
+        public Validacao Validacao { get; set; }
 
         public bool IsValid()
         {
-            return ValidationResult.IsValid;
+            return Validacao.ehValido;
         }
         public bool ValidarTodasPropriedades()
         {
-            if (ValidationResult == null)
-                ValidationResult = new ValidationResult();
+            if (Validacao == null)
+                Validacao = new Validacao();
 
             if (ID <= 0)
-                ValidationResult.Errors.Add("ID Inválido.");
+                Validacao.Erros.Add("ID Inválido.");
 
             if(Url.ObterValorOuPadrao("").Trim() == "")
-                ValidationResult.Errors.Add("ID Inválido.");
+                Validacao.Erros.Add("ID Inválido.");
 
             if (Formato.ObterValorOuPadrao("").Trim() == "")
-                ValidationResult.Errors.Add("Formato Inválido.");
+                Validacao.Erros.Add("Formato Inválido.");
             
             if(Nome.ObterValorOuPadrao("").Trim() == "")
-                ValidationResult.Errors.Add("Nome Inválido.");
+                Validacao.Erros.Add("Nome Inválido.");
 
             if (Alt.ObterValorOuPadrao("").Trim() == "")
-                ValidationResult.Errors.Add("Alt Inválido.");
+                Validacao.Erros.Add("Alt Inválido.");
 
             if (Autor.ObterValorOuPadrao("").Trim() == "")
-                ValidationResult.Errors.Add("Autor Inválido.");
+                Validacao.Erros.Add("Autor Inválido.");
 
             if (AutorURL.ObterValorOuPadrao("").Trim() == "")
-                ValidationResult.Errors.Add("URL Autor Inválido.");
+                Validacao.Erros.Add("URL Autor Inválido.");
 
             if(Data == null)
-                ValidationResult.Errors.Add("Arquivo Inválido.");
+                Validacao.Erros.Add("Arquivo Inválido.");
 
-            return ValidationResult.Errors.Count() <= 0;
+            return Validacao.Erros.Count() <= 0;
         }
         public bool ValidarFormatoNome()
         {
-            if (ValidationResult == null)
-                ValidationResult = new ValidationResult();
+            if (Validacao == null)
+                Validacao = new Validacao();
 
             if (Formato.ObterValorOuPadrao("").Trim() == "")
-                ValidationResult.Errors.Add("Formato Inválido.");
+                Validacao.Erros.Add("Formato Inválido.");
 
             if (Nome.ObterValorOuPadrao("").Trim() == "")
-                ValidationResult.Errors.Add("Nome Inválido.");
+                Validacao.Erros.Add("Nome Inválido.");
             
-            return ValidationResult.Errors.Count() <= 0;
+            return Validacao.Erros.Count() <= 0;
         }
         public bool ValidarUrl()
         {
-            if (ValidationResult == null)
-                ValidationResult = new ValidationResult();
+            if (Validacao == null)
+                Validacao = new Validacao();
 
             if (Url.ObterValorOuPadrao("").Trim() == "")
-                ValidationResult.Errors.Add("ID Inválido.");
+                Validacao.Erros.Add("ID Inválido.");
 
-            return ValidationResult.Errors.Count() <= 0;
+            return Validacao.Erros.Count() <= 0;
         }
     }
 }

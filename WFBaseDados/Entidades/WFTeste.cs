@@ -13,6 +13,6 @@ namespace WFBaseDados.Entidades
         public string Propriedade { get; set; } 
         public string Valor { get; set; }
 
-        public ValidationResult ValidationResult { get; set; }
+        public Validacao Validacao{ get; set; }
     }
 }

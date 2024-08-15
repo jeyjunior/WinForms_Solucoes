@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WFBase;
+using WFBaseDados;
 using WFBaseDados.Interfaces;
 using WFGerenciadorDeGastos.Telas;
 
@@ -16,15 +17,17 @@ namespace WFGerenciadorDeGastos
     public partial class Principal : Form
     {
         private readonly IWFTesteRepositorio wFTesteRepositorio;
+        private readonly IWFCategoriaRepositorio wFCategoriaRepositorio;
         public Principal()
         {
             InitializeComponent();
 
             wFTesteRepositorio = BootstrapBase.Container.GetInstance<IWFTesteRepositorio>();
+            wFCategoriaRepositorio = BootstrapBase.Container.GetInstance<IWFCategoriaRepositorio>();
         }
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
-            var teste = wFTesteRepositorio.ObterLista();
+            var teste = wFCategoriaRepositorio.ObterLista("Nome = @Nome ", new { Nome = "Mercado" });
         }
     }
 }
