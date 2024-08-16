@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
+using WFBase.Base;
 
 namespace WFBaseDados.Entidades
 {
@@ -17,6 +18,6 @@ namespace WFBaseDados.Entidades
         public string Nome { get; set; }
 
         [Editable(false)]
-        public ValidationResult ValidationResult { get; set; }
+        public Validacao Validacao { get; set; }
     }
 }

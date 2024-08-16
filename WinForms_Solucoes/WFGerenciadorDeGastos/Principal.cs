@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WFBase;
+using WFBase.Base;
 using WFBaseDados;
 using WFBaseDados.Interfaces;
 using WFGerenciadorDeGastos.Telas;
@@ -27,7 +28,6 @@ namespace WFGerenciadorDeGastos
         }
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
-            var teste = wFCategoriaRepositorio.ObterLista("Nome = @Nome ", new { Nome = "Mercado" });
         }
     }
 }
