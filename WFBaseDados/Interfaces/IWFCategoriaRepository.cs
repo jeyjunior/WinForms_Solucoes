@@ -7,7 +7,7 @@ using WFBaseDados.Entidades;
 
 namespace WFBaseDados.Interfaces
 {
-    public interface IWFCategoriaRepositorio : IRepositorio<WFCategoria>
+    public interface IWFCategoriaRepository : IRepository<WFCategoria>
     {
     }
 }

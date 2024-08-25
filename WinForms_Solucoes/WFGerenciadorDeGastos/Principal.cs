@@ -17,17 +17,41 @@ namespace WFGerenciadorDeGastos
 {
     public partial class Principal : Form
     {
-        private readonly IWFTesteRepositorio wFTesteRepositorio;
-        private readonly IWFCategoriaRepositorio wFCategoriaRepositorio;
+        #region Interfaces
+        private readonly IWFTesteRepository wFTesteRepositorio;
+        private readonly IWFCategoriaRepository wFCategoriaRepositorio;
+        #endregion
+
+        #region Construtor
         public Principal()
         {
             InitializeComponent();
 
-            wFTesteRepositorio = BootstrapBase.Container.GetInstance<IWFTesteRepositorio>();
-            wFCategoriaRepositorio = BootstrapBase.Container.GetInstance<IWFCategoriaRepositorio>();
+            wFTesteRepositorio = BootstrapBase.Container.GetInstance<IWFTesteRepository>();
+            wFCategoriaRepositorio = BootstrapBase.Container.GetInstance<IWFCategoriaRepository>();
+        }
+        #endregion
+
+        #region Eventos
+        private void Principal_Load(object sender, EventArgs e)
+        {
+
         }
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
         }
+        private void btnAddPagamento_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void btnAddCategoria_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+        #region Métodos
+
+        #endregion
     }
 }

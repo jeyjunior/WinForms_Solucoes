@@ -12,7 +12,7 @@ using WFBaseDados.Interfaces;
 
 namespace WFBaseDados.Repositorios
 {
-    public class Repositorio<T> : IRepositorio<T> 
+    public class Repository<T> : IRepository<T> 
     {
         protected readonly string conexao = Program.ObterConexao();
 

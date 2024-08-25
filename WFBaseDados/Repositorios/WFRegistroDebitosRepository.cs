@@ -8,7 +8,7 @@ using WFBaseDados.Interfaces;
 
 namespace WFBaseDados.Repositorios
 {
-    public class WFCategoriaRepositorio : Repositorio<WFCategoria>, IWFCategoriaRepositorio
+    public class WFRegistroDebitosRepository : Repository<WFRegistroDebitos>, IWFRegistroDebitosRepository
     {
     }
 }

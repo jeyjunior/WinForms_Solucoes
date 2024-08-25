@@ -7,7 +7,7 @@ using WFBase.Base;
 
 namespace WFBaseDados.Interfaces
 {
-    public interface IRepositorio <T>
+    public interface IRepository <T>
     {
         T Obter(int id, Validacao validacao = null);
         IEnumerable<T> ObterLista(Validacao validacao = null);

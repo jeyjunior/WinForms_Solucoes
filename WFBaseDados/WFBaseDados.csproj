@@ -85,14 +85,18 @@
     <Compile Include="Entidades\GerenciadorDeGastos\WFRegistroDebitos.cs" />
     <Compile Include="Entidades\WFTeste.cs" />
     <Compile Include="Interfaces\Config\IConfiguracaoBancoDados.cs" />
-    <Compile Include="Interfaces\IRepositorio.cs" />
-    <Compile Include="Interfaces\IWFCategoriaRepositorio.cs" />
-    <Compile Include="Interfaces\IWFTesteRepositorio.cs" />
+    <Compile Include="Interfaces\IWFMetodoPagamentoRepository.cs" />
+    <Compile Include="Interfaces\IWFRegistroDebitosRepository.cs" />
+    <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Interfaces\IWFCategoriaRepository.cs" />
+    <Compile Include="Interfaces\IWFTesteRepository.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositorios\Repositorio.cs" />
-    <Compile Include="Repositorios\WFCategoriaRepositorio.cs" />
-    <Compile Include="Repositorios\WFTesteRepositorio.cs" />
+    <Compile Include="Repositorios\Repository.cs" />
+    <Compile Include="Repositorios\WFCategoriaRepository.cs" />
+    <Compile Include="Repositorios\WFMetodoPagamentoRepository.cs" />
+    <Compile Include="Repositorios\WFRegistroDebitosRepository.cs" />
+    <Compile Include="Repositorios\WFTesteRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WFBase\WFBase.csproj">

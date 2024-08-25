@@ -19,8 +19,8 @@ CREATE TABLE WFRegistroDebitos (
     Nome VARCHAR(255) NOT NULL,
     DataDebito DATE NOT NULL,
     Valor DECIMAL(10, 2) NOT NULL,
-    PK_WFCategoria INT,
-    PK_WFMetodoPagamento INT,
+    FK_WFCategoria INT,
+    FK_WFMetodoPagamento INT,
     FOREIGN KEY (PK_WFCategoria) REFERENCES WFCategoria(PK_WFCategoria),
     FOREIGN KEY (PK_WFMetodoPagamento) REFERENCES WFMetodoPagamento(PK_WFMetodoPagamento)
 );
