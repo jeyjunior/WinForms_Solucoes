@@ -44,6 +44,7 @@ namespace WFGerenciadorDeGastos
         private void Principal_Load(object sender, EventArgs e)
         {
             CarregarDropDown();
+            Pesquisar();
         }
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
@@ -65,7 +66,6 @@ namespace WFGerenciadorDeGastos
             CarregarCategoria();
             CarregarMetodoPagamento();
         }
-
         private void CarregarCategoria()
         {
             var wFCategoria = wFCategoriaRepository.ObterLista().ToList();
@@ -76,7 +76,6 @@ namespace WFGerenciadorDeGastos
             cboCategoria.ValueMember = "PK_WFCategoria";
             cboCategoria.DataSource = wFCategoria.OrderBy(i => i.Nome).ToList();
         }
-
         private void CarregarMetodoPagamento()
         {
             var wFMetodoPagamento = wFMetodoPagamentoRepository.ObterLista().ToList();
@@ -87,7 +86,6 @@ namespace WFGerenciadorDeGastos
             cboPagamento.ValueMember = "PK_WFMetodoPagamento";
             cboPagamento.DataSource = wFMetodoPagamento.OrderBy(i => i.Nome).ToList();
         }
-
         private void RegistrarDespesa()
         {
             try
@@ -105,24 +103,29 @@ namespace WFGerenciadorDeGastos
 
                 var ret = wFRegistroDebitosRepository.Adicionar(wFRegistrarDespesa);
 
-                BindPrincipal();
+                Pesquisar();
             }
             catch (Exception ex)
             {
 
             }
         }
+        private void Pesquisar()
+        {
+            wFRegistroDebitosCollection = wFRegistroDebitosRepository.ObterLista().ToList();
 
+            BindPrincipal();
+        }
         private void BindPrincipal()
         {
             var resultado = wFRegistroDebitosCollection.Select(i => new
             {
                 PK_WFRegistroDebitos = i.PK_WFRegistroDebitos,
                 Despesa = i.Nome,
-                Categoria = "",
-                Pagamento = "",
-                DataDespesa = "",
-                Valor = 0,
+                Categoria = cboCategoria.Items.OfType<WFCategoria>().Where(c => c.PK_WFCategoria == i.FK_WFCategoria.GetValueOrDefault(-1)).FirstOrDefault().Nome,
+                Pagamento = cboPagamento.Items.OfType<WFMetodoPagamento>().Where(p => p.PK_WFMetodoPagamento == i.FK_WFMetodoPagamento.GetValueOrDefault(-1)).FirstOrDefault().Nome,
+                DataDespesa = i.DataDebito,
+                Valor = i.Valor,
             }).ToList();
 
             dtgGastos.DataSource = resultado.ToList();

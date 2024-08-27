@@ -28,14 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dtgGastos = new System.Windows.Forms.DataGridView();
-            this.colPK_GGDespesa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDespesa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPagamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDataDespesa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colValor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnRegistrar = new System.Windows.Forms.Button();
             this.cboPagamento = new System.Windows.Forms.ComboBox();
             this.btnAddPagamento = new System.Windows.Forms.Button();
@@ -48,6 +42,12 @@
             this.lblStatus = new System.Windows.Forms.Label();
             this.lblValor = new System.Windows.Forms.Label();
             this.txtValor = new System.Windows.Forms.TextBox();
+            this.colPK_WFRegistroDebitos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDespesa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPagamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDataDespesa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colValor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dtgGastos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,17 +56,17 @@
             this.dtgGastos.AllowUserToAddRows = false;
             this.dtgGastos.AllowUserToResizeColumns = false;
             this.dtgGastos.AllowUserToResizeRows = false;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dtgGastos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dtgGastos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dtgGastos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgGastos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colPK_GGDespesa,
+            this.colPK_WFRegistroDebitos,
             this.colDespesa,
             this.colCategoria,
             this.colPagamento,
@@ -79,54 +79,6 @@
             this.dtgGastos.RowHeadersWidth = 51;
             this.dtgGastos.Size = new System.Drawing.Size(637, 249);
             this.dtgGastos.TabIndex = 0;
-            // 
-            // colPK_GGDespesa
-            // 
-            this.colPK_GGDespesa.DataPropertyName = "PK_GGDespesa";
-            this.colPK_GGDespesa.HeaderText = "PK_GGDespesa";
-            this.colPK_GGDespesa.MinimumWidth = 2;
-            this.colPK_GGDespesa.Name = "colPK_GGDespesa";
-            this.colPK_GGDespesa.ReadOnly = true;
-            this.colPK_GGDespesa.Visible = false;
-            this.colPK_GGDespesa.Width = 2;
-            // 
-            // colDespesa
-            // 
-            this.colDespesa.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colDespesa.DataPropertyName = "Despesa";
-            this.colDespesa.HeaderText = "Despesa";
-            this.colDespesa.Name = "colDespesa";
-            this.colDespesa.ReadOnly = true;
-            // 
-            // colCategoria
-            // 
-            this.colCategoria.DataPropertyName = "Categoria";
-            this.colCategoria.HeaderText = "Categoria";
-            this.colCategoria.Name = "colCategoria";
-            this.colCategoria.ReadOnly = true;
-            // 
-            // colPagamento
-            // 
-            this.colPagamento.DataPropertyName = "Pagamento";
-            this.colPagamento.HeaderText = "Tipo de Pagamento";
-            this.colPagamento.MinimumWidth = 100;
-            this.colPagamento.Name = "colPagamento";
-            this.colPagamento.ReadOnly = true;
-            this.colPagamento.Width = 120;
-            // 
-            // colDataDespesa
-            // 
-            this.colDataDespesa.DataPropertyName = "DataDespesa";
-            this.colDataDespesa.HeaderText = "Data da Despesa";
-            this.colDataDespesa.MinimumWidth = 120;
-            this.colDataDespesa.Name = "colDataDespesa";
-            this.colDataDespesa.Width = 120;
-            // 
-            // colValor
-            // 
-            this.colValor.DataPropertyName = "Valor";
-            this.colValor.HeaderText = "Valor";
-            this.colValor.Name = "colValor";
             // 
             // btnRegistrar
             // 
@@ -241,6 +193,54 @@
             this.txtValor.Size = new System.Drawing.Size(172, 20);
             this.txtValor.TabIndex = 11;
             // 
+            // colPK_WFRegistroDebitos
+            // 
+            this.colPK_WFRegistroDebitos.DataPropertyName = "PK_WFRegistroDebitos";
+            this.colPK_WFRegistroDebitos.HeaderText = "PK_WFRegistroDebitos";
+            this.colPK_WFRegistroDebitos.MinimumWidth = 2;
+            this.colPK_WFRegistroDebitos.Name = "colPK_WFRegistroDebitos";
+            this.colPK_WFRegistroDebitos.ReadOnly = true;
+            this.colPK_WFRegistroDebitos.Visible = false;
+            this.colPK_WFRegistroDebitos.Width = 2;
+            // 
+            // colDespesa
+            // 
+            this.colDespesa.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colDespesa.DataPropertyName = "Despesa";
+            this.colDespesa.HeaderText = "Despesa";
+            this.colDespesa.Name = "colDespesa";
+            this.colDespesa.ReadOnly = true;
+            // 
+            // colCategoria
+            // 
+            this.colCategoria.DataPropertyName = "Categoria";
+            this.colCategoria.HeaderText = "Categoria";
+            this.colCategoria.Name = "colCategoria";
+            this.colCategoria.ReadOnly = true;
+            // 
+            // colPagamento
+            // 
+            this.colPagamento.DataPropertyName = "Pagamento";
+            this.colPagamento.HeaderText = "Tipo de Pagamento";
+            this.colPagamento.MinimumWidth = 100;
+            this.colPagamento.Name = "colPagamento";
+            this.colPagamento.ReadOnly = true;
+            this.colPagamento.Width = 120;
+            // 
+            // colDataDespesa
+            // 
+            this.colDataDespesa.DataPropertyName = "DataDespesa";
+            this.colDataDespesa.HeaderText = "Data da Despesa";
+            this.colDataDespesa.MinimumWidth = 120;
+            this.colDataDespesa.Name = "colDataDespesa";
+            this.colDataDespesa.Width = 120;
+            // 
+            // colValor
+            // 
+            this.colValor.DataPropertyName = "Valor";
+            this.colValor.HeaderText = "Valor";
+            this.colValor.Name = "colValor";
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -282,15 +282,15 @@
         private System.Windows.Forms.Label lblDespesa;
         private System.Windows.Forms.Label lblCategoria;
         private System.Windows.Forms.Label lblPagamento;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPK_GGDespesa;
+        private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.Label lblValor;
+        private System.Windows.Forms.TextBox txtValor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPK_WFRegistroDebitos;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDespesa;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategoria;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPagamento;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDataDespesa;
         private System.Windows.Forms.DataGridViewTextBoxColumn colValor;
-        private System.Windows.Forms.Label lblStatus;
-        private System.Windows.Forms.Label lblValor;
-        private System.Windows.Forms.TextBox txtValor;
     }
 }
 
