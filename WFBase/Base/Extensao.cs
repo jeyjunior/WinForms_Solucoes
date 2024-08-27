@@ -36,5 +36,34 @@ namespace WFBase.Base
         Sair:;
             return ret;
         }
+        public static int ObterValorOuPadrao(this string str, int padrao = 0)
+        {
+            if (string.IsNullOrEmpty(str))
+            {
+                return padrao;
+            }
+
+            if (int.TryParse(str.Trim(), out int valor))
+            {
+                return valor;
+            }
+
+            return padrao;
+        }
+        public static decimal ObterValorOuPadrao(this string str, decimal padrao = 0m)
+        {
+            if (string.IsNullOrEmpty(str))
+            {
+                return padrao;
+            }
+
+            if (decimal.TryParse(str.Trim(), out decimal valor))
+            {
+                return valor;
+            }
+
+            return padrao;
+        }
+
     }
 }

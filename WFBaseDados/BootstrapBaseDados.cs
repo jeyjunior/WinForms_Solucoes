@@ -26,6 +26,8 @@ namespace WFBaseDados
             Container.Register<IConfiguracaoBancoDados, ConfiguracaoBancoDados>(Lifestyle.Singleton);
             Container.Register<IWFTesteRepository, WFTesteRepository>(Lifestyle.Singleton);
             Container.Register<IWFCategoriaRepository, WFCategoriaRepository>(Lifestyle.Singleton);
+            Container.Register<IWFMetodoPagamentoRepository, WFMetodoPagamentoRepository>(Lifestyle.Singleton);
+            Container.Register<IWFRegistroDebitosRepository, WFRegistroDebitosRepository>(Lifestyle.Singleton);
         }
     }
 }

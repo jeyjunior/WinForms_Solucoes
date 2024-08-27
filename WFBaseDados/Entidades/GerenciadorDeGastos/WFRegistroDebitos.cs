@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WFBase.Base;
 
 namespace WFBaseDados.Entidades
 {
@@ -20,6 +21,6 @@ namespace WFBaseDados.Entidades
         public int? FK_WFMetodoPagamento { get; set; }
 
         [Editable(false)]
-        public ValidationResult ValidationResult { get; set; }
+        public Validacao Validacao { get; set; }
     }
 }
