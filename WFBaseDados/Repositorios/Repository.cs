@@ -165,6 +165,11 @@ namespace WFBaseDados.Repositorios
 
             return ExecutarConsulta(query, parametros, validacao);
         }
+        public virtual IEnumerable<T> ObterLista(object parametros, Validacao validacao = null)
+        {
+            string query = $"SELECT * FROM {typeof(T).Name} ";
+            return ExecutarConsulta(query, parametros, validacao);
+        }
         public virtual int Adicionar(T entidade, Validacao validacao = null)
         {
             int idInserido = 0;

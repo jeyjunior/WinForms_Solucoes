@@ -82,11 +82,11 @@
     <Compile Include="Entidades\Config\ConfiguracaoBancoDados.cs" />
     <Compile Include="Entidades\GerenciadorDeGastos\WFCategoria.cs" />
     <Compile Include="Entidades\GerenciadorDeGastos\WFMetodoPagamento.cs" />
-    <Compile Include="Entidades\GerenciadorDeGastos\WFRegistroDebitos.cs" />
+    <Compile Include="Entidades\GerenciadorDeGastos\WFRegistroDebito.cs" />
     <Compile Include="Entidades\WFTeste.cs" />
     <Compile Include="Interfaces\Config\IConfiguracaoBancoDados.cs" />
     <Compile Include="Interfaces\IWFMetodoPagamentoRepository.cs" />
-    <Compile Include="Interfaces\IWFRegistroDebitosRepository.cs" />
+    <Compile Include="Interfaces\IWFRegistroDebitoRepository.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IWFCategoriaRepository.cs" />
     <Compile Include="Interfaces\IWFTesteRepository.cs" />
@@ -95,7 +95,7 @@
     <Compile Include="Repositorios\Repository.cs" />
     <Compile Include="Repositorios\WFCategoriaRepository.cs" />
     <Compile Include="Repositorios\WFMetodoPagamentoRepository.cs" />
-    <Compile Include="Repositorios\WFRegistroDebitosRepository.cs" />
+    <Compile Include="Repositorios\WFRegistroDebitoRepository.cs" />
     <Compile Include="Repositorios\WFTesteRepository.cs" />
   </ItemGroup>
   <ItemGroup>

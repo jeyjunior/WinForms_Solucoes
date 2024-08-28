@@ -22,11 +22,11 @@ namespace WFGerenciadorDeGastos
         #region Interfaces
         private readonly IWFCategoriaRepository wFCategoriaRepository;
         private readonly IWFMetodoPagamentoRepository wFMetodoPagamentoRepository;
-        private readonly IWFRegistroDebitosRepository wFRegistroDebitosRepository;
+        private readonly IWFRegistroDebitoRepository wFRegistroDebitosRepository;
         #endregion
 
         #region Propriedades
-        private IEnumerable<WFRegistroDebitos> wFRegistroDebitosCollection;
+        private IEnumerable<WFRegistroDebito> wFRegistroDebitosCollection;
         #endregion
 
         #region Construtor
@@ -36,7 +36,7 @@ namespace WFGerenciadorDeGastos
 
             wFCategoriaRepository = Bootstrap.Container.GetInstance<IWFCategoriaRepository>();
             wFMetodoPagamentoRepository = Bootstrap.Container.GetInstance<IWFMetodoPagamentoRepository>();
-            wFRegistroDebitosRepository = Bootstrap.Container.GetInstance<IWFRegistroDebitosRepository>();
+            wFRegistroDebitosRepository = Bootstrap.Container.GetInstance<IWFRegistroDebitoRepository>();
         }
         #endregion
 
@@ -55,6 +55,18 @@ namespace WFGerenciadorDeGastos
 
         }
         private void btnAddCategoria_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void btnPesquisar_Click(object sender, EventArgs e)
+        {
+            Pesquisar();
+        }
+        private void btnExcluir_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void btnAlterar_Click(object sender, EventArgs e)
         {
 
         }
@@ -90,7 +102,7 @@ namespace WFGerenciadorDeGastos
         {
             try
             {
-                var wFRegistrarDespesa = new WFRegistroDebitos
+                var wFRegistrarDespesa = new WFRegistroDebito
                 {
                     Nome = txtDespesa.Text.ObterValorOuPadrao("").Trim(),
                     FK_WFCategoria = (int)cboCategoria.SelectedValue > 0 ? (int)cboCategoria.SelectedValue : (int?)null,
@@ -112,7 +124,15 @@ namespace WFGerenciadorDeGastos
         }
         private void Pesquisar()
         {
-            wFRegistroDebitosCollection = wFRegistroDebitosRepository.ObterLista().ToList();
+            var parametro = new WFRegistroDebitoRequest
+            {
+                Nome = txtDespesa.Text.ObterValorOuPadrao("").Trim(),
+                Valor = txtValor.Text.ObterValorOuPadrao(-1),
+                FK_WFCategoria = (int)cboCategoria.SelectedValue,
+                FK_WFMetodoPagamento = (int)cboPagamento.SelectedValue,
+            };
+
+            wFRegistroDebitosCollection = wFRegistroDebitosRepository.ObterLista(parametro).ToList();
 
             BindPrincipal();
         }
@@ -120,7 +140,7 @@ namespace WFGerenciadorDeGastos
         {
             var resultado = wFRegistroDebitosCollection.Select(i => new
             {
-                PK_WFRegistroDebitos = i.PK_WFRegistroDebitos,
+                PK_WFRegistroDebito = i.PK_WFRegistroDebito,
                 Despesa = i.Nome,
                 Categoria = cboCategoria.Items.OfType<WFCategoria>().Where(c => c.PK_WFCategoria == i.FK_WFCategoria.GetValueOrDefault(-1)).FirstOrDefault().Nome,
                 Pagamento = cboPagamento.Items.OfType<WFMetodoPagamento>().Where(p => p.PK_WFMetodoPagamento == i.FK_WFMetodoPagamento.GetValueOrDefault(-1)).FirstOrDefault().Nome,

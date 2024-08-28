@@ -42,7 +42,10 @@
             this.lblStatus = new System.Windows.Forms.Label();
             this.lblValor = new System.Windows.Forms.Label();
             this.txtValor = new System.Windows.Forms.TextBox();
-            this.colPK_WFRegistroDebitos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnPesquisar = new System.Windows.Forms.Button();
+            this.btnExcluir = new System.Windows.Forms.Button();
+            this.btnAlterar = new System.Windows.Forms.Button();
+            this.colPK_WFRegistroDebito = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDespesa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCategoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPagamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -66,26 +69,26 @@
             this.dtgGastos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dtgGastos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgGastos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colPK_WFRegistroDebitos,
+            this.colPK_WFRegistroDebito,
             this.colDespesa,
             this.colCategoria,
             this.colPagamento,
             this.colDataDespesa,
             this.colValor});
-            this.dtgGastos.Location = new System.Drawing.Point(12, 100);
+            this.dtgGastos.Location = new System.Drawing.Point(12, 110);
             this.dtgGastos.MultiSelect = false;
             this.dtgGastos.Name = "dtgGastos";
             this.dtgGastos.RowHeadersVisible = false;
             this.dtgGastos.RowHeadersWidth = 51;
-            this.dtgGastos.Size = new System.Drawing.Size(637, 249);
+            this.dtgGastos.Size = new System.Drawing.Size(643, 239);
             this.dtgGastos.TabIndex = 0;
             // 
             // btnRegistrar
             // 
             this.btnRegistrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRegistrar.Location = new System.Drawing.Point(560, 13);
+            this.btnRegistrar.Location = new System.Drawing.Point(471, 69);
             this.btnRegistrar.Name = "btnRegistrar";
-            this.btnRegistrar.Size = new System.Drawing.Size(89, 75);
+            this.btnRegistrar.Size = new System.Drawing.Size(89, 34);
             this.btnRegistrar.TabIndex = 1;
             this.btnRegistrar.Text = "Registrar";
             this.btnRegistrar.UseVisualStyleBackColor = true;
@@ -95,15 +98,15 @@
             // 
             this.cboPagamento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboPagamento.FormattingEnabled = true;
-            this.cboPagamento.Location = new System.Drawing.Point(308, 67);
+            this.cboPagamento.Location = new System.Drawing.Point(517, 26);
             this.cboPagamento.Name = "cboPagamento";
-            this.cboPagamento.Size = new System.Drawing.Size(196, 21);
+            this.cboPagamento.Size = new System.Drawing.Size(103, 21);
             this.cboPagamento.TabIndex = 2;
             // 
             // btnAddPagamento
             // 
             this.btnAddPagamento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddPagamento.Location = new System.Drawing.Point(510, 67);
+            this.btnAddPagamento.Location = new System.Drawing.Point(626, 25);
             this.btnAddPagamento.Name = "btnAddPagamento";
             this.btnAddPagamento.Size = new System.Drawing.Size(29, 21);
             this.btnAddPagamento.TabIndex = 3;
@@ -114,7 +117,7 @@
             // btnAddCategoria
             // 
             this.btnAddCategoria.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddCategoria.Location = new System.Drawing.Point(237, 67);
+            this.btnAddCategoria.Location = new System.Drawing.Point(479, 26);
             this.btnAddCategoria.Name = "btnAddCategoria";
             this.btnAddCategoria.Size = new System.Drawing.Size(29, 21);
             this.btnAddCategoria.TabIndex = 5;
@@ -126,17 +129,17 @@
             // 
             this.cboCategoria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboCategoria.FormattingEnabled = true;
-            this.cboCategoria.Location = new System.Drawing.Point(12, 67);
+            this.cboCategoria.Location = new System.Drawing.Point(332, 27);
             this.cboCategoria.Name = "cboCategoria";
-            this.cboCategoria.Size = new System.Drawing.Size(219, 21);
+            this.cboCategoria.Size = new System.Drawing.Size(141, 21);
             this.cboCategoria.TabIndex = 4;
             // 
             // txtDespesa
             // 
             this.txtDespesa.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtDespesa.Location = new System.Drawing.Point(12, 26);
+            this.txtDespesa.Location = new System.Drawing.Point(12, 28);
             this.txtDespesa.Name = "txtDespesa";
-            this.txtDespesa.Size = new System.Drawing.Size(348, 20);
+            this.txtDespesa.Size = new System.Drawing.Size(193, 20);
             this.txtDespesa.TabIndex = 6;
             // 
             // lblDespesa
@@ -151,7 +154,7 @@
             // lblCategoria
             // 
             this.lblCategoria.AutoSize = true;
-            this.lblCategoria.Location = new System.Drawing.Point(12, 54);
+            this.lblCategoria.Location = new System.Drawing.Point(329, 13);
             this.lblCategoria.Name = "lblCategoria";
             this.lblCategoria.Size = new System.Drawing.Size(52, 13);
             this.lblCategoria.TabIndex = 8;
@@ -160,7 +163,7 @@
             // lblPagamento
             // 
             this.lblPagamento.AutoSize = true;
-            this.lblPagamento.Location = new System.Drawing.Point(308, 54);
+            this.lblPagamento.Location = new System.Drawing.Point(514, 13);
             this.lblPagamento.Name = "lblPagamento";
             this.lblPagamento.Size = new System.Drawing.Size(61, 13);
             this.lblPagamento.TabIndex = 9;
@@ -179,7 +182,7 @@
             // lblValor
             // 
             this.lblValor.AutoSize = true;
-            this.lblValor.Location = new System.Drawing.Point(366, 13);
+            this.lblValor.Location = new System.Drawing.Point(211, 13);
             this.lblValor.Name = "lblValor";
             this.lblValor.Size = new System.Drawing.Size(54, 13);
             this.lblValor.TabIndex = 12;
@@ -188,20 +191,53 @@
             // txtValor
             // 
             this.txtValor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtValor.Location = new System.Drawing.Point(369, 26);
+            this.txtValor.Location = new System.Drawing.Point(211, 28);
             this.txtValor.Name = "txtValor";
-            this.txtValor.Size = new System.Drawing.Size(172, 20);
+            this.txtValor.Size = new System.Drawing.Size(109, 20);
             this.txtValor.TabIndex = 11;
             // 
-            // colPK_WFRegistroDebitos
+            // btnPesquisar
             // 
-            this.colPK_WFRegistroDebitos.DataPropertyName = "PK_WFRegistroDebitos";
-            this.colPK_WFRegistroDebitos.HeaderText = "PK_WFRegistroDebitos";
-            this.colPK_WFRegistroDebitos.MinimumWidth = 2;
-            this.colPK_WFRegistroDebitos.Name = "colPK_WFRegistroDebitos";
-            this.colPK_WFRegistroDebitos.ReadOnly = true;
-            this.colPK_WFRegistroDebitos.Visible = false;
-            this.colPK_WFRegistroDebitos.Width = 2;
+            this.btnPesquisar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPesquisar.Location = new System.Drawing.Point(566, 70);
+            this.btnPesquisar.Name = "btnPesquisar";
+            this.btnPesquisar.Size = new System.Drawing.Size(89, 33);
+            this.btnPesquisar.TabIndex = 13;
+            this.btnPesquisar.Text = "Pesquisar";
+            this.btnPesquisar.UseVisualStyleBackColor = true;
+            this.btnPesquisar.Click += new System.EventHandler(this.btnPesquisar_Click);
+            // 
+            // btnExcluir
+            // 
+            this.btnExcluir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExcluir.Location = new System.Drawing.Point(10, 70);
+            this.btnExcluir.Name = "btnExcluir";
+            this.btnExcluir.Size = new System.Drawing.Size(89, 34);
+            this.btnExcluir.TabIndex = 14;
+            this.btnExcluir.Text = "Excluir";
+            this.btnExcluir.UseVisualStyleBackColor = true;
+            this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
+            // 
+            // btnAlterar
+            // 
+            this.btnAlterar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAlterar.Location = new System.Drawing.Point(376, 69);
+            this.btnAlterar.Name = "btnAlterar";
+            this.btnAlterar.Size = new System.Drawing.Size(89, 34);
+            this.btnAlterar.TabIndex = 15;
+            this.btnAlterar.Text = "Alterar";
+            this.btnAlterar.UseVisualStyleBackColor = true;
+            this.btnAlterar.Click += new System.EventHandler(this.btnAlterar_Click);
+            // 
+            // colPK_WFRegistroDebito
+            // 
+            this.colPK_WFRegistroDebito.DataPropertyName = "PK_WFRegistroDebito";
+            this.colPK_WFRegistroDebito.HeaderText = "PK_WFRegistroDebito";
+            this.colPK_WFRegistroDebito.MinimumWidth = 2;
+            this.colPK_WFRegistroDebito.Name = "colPK_WFRegistroDebito";
+            this.colPK_WFRegistroDebito.ReadOnly = true;
+            this.colPK_WFRegistroDebito.Visible = false;
+            this.colPK_WFRegistroDebito.Width = 2;
             // 
             // colDespesa
             // 
@@ -257,8 +293,11 @@
             this.Controls.Add(this.cboCategoria);
             this.Controls.Add(this.btnAddPagamento);
             this.Controls.Add(this.cboPagamento);
-            this.Controls.Add(this.btnRegistrar);
             this.Controls.Add(this.dtgGastos);
+            this.Controls.Add(this.btnAlterar);
+            this.Controls.Add(this.btnExcluir);
+            this.Controls.Add(this.btnPesquisar);
+            this.Controls.Add(this.btnRegistrar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Principal";
             this.ShowIcon = false;
@@ -285,7 +324,10 @@
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.Label lblValor;
         private System.Windows.Forms.TextBox txtValor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPK_WFRegistroDebitos;
+        private System.Windows.Forms.Button btnPesquisar;
+        private System.Windows.Forms.Button btnExcluir;
+        private System.Windows.Forms.Button btnAlterar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPK_WFRegistroDebito;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDespesa;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCategoria;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPagamento;
