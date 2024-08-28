@@ -20,4 +20,10 @@ namespace WFBase
         PexelsURL = 0,
         PexelsKey = 1,
     }
+
+    public enum Operacao
+    {
+        Visualizar,
+        Alterar,
+    }
 }

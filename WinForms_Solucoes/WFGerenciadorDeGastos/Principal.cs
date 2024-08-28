@@ -27,6 +27,9 @@ namespace WFGerenciadorDeGastos
 
         #region Propriedades
         private IEnumerable<WFRegistroDebito> wFRegistroDebitosCollection;
+        private Operacao OperacaoAtual;
+
+        private int PK_WFRegistroDebitoSelecionado;
         #endregion
 
         #region Construtor
@@ -45,6 +48,8 @@ namespace WFGerenciadorDeGastos
         {
             CarregarDropDown();
             Pesquisar();
+
+            HabilitarOperacao(Operacao.Visualizar);
         }
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
@@ -68,7 +73,31 @@ namespace WFGerenciadorDeGastos
         }
         private void btnAlterar_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if (OperacaoAtual != Operacao.Alterar)
+                {
+                    HabilitarOperacao(Operacao.Alterar);
 
+                    var wFRegistroDebitos = wFRegistroDebitosCollection
+                        .Where(i => i.PK_WFRegistroDebito == PK_WFRegistroDebitoSelecionado)
+                        .FirstOrDefault();
+
+                    txtDespesa.Text = wFRegistroDebitos.Nome;
+                    txtValor.Text = wFRegistroDebitos.Valor.ToString();
+                    cboCategoria.SelectedValue = wFRegistroDebitos.FK_WFCategoria.GetValueOrDefault(-1);
+                    cboPagamento.SelectedValue = wFRegistroDebitos.FK_WFMetodoPagamento.GetValueOrDefault(-1);
+                }
+                else
+                {
+                    Limpar();
+                    HabilitarOperacao(Operacao.Visualizar);
+                }
+            }
+            catch
+            {
+                HabilitarOperacao(Operacao.Visualizar);
+            }
         }
         #endregion
 
@@ -150,6 +179,53 @@ namespace WFGerenciadorDeGastos
 
             dtgGastos.DataSource = resultado.ToList();
         }
+        private void HabilitarOperacao(Operacao operacao)
+        {
+            OperacaoAtual = operacao;
+            switch (operacao)
+            {
+                case Operacao.Visualizar:
+                    this.btnExcluir.Enabled = true;
+                    this.btnPesquisar.Enabled = true;
+                    this.btnAlterar.Enabled = true;
+                    this.btnRegistrar.Enabled = true;
+
+                    this.btnAlterar.Text = "Alterar";
+                    break;
+                case Operacao.Alterar:
+                    this.btnExcluir.Enabled = false;
+                    this.btnPesquisar.Enabled = false;
+                    this.btnAlterar.Enabled = true;
+                    this.btnRegistrar.Enabled = true;
+
+                    this.btnAlterar.Text = "Cancelar";
+                    break;
+                default:
+                    break;
+            }
+        }
         #endregion
+        private void Limpar()
+        {
+            txtDespesa.Text = "";
+            txtValor.Text = "";
+            cboCategoria.SelectedValue = -1;
+            cboPagamento.SelectedValue = -1;
+        }
+        private void dtgGastos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dtgGastos.Rows.Count <= 0)
+                return;
+
+            PK_WFRegistroDebitoSelecionado = dtgGastos
+                .SelectedRows
+                .OfType<DataGridViewRow>()
+                .Select(i => i.Cells["colPK_WFRegistroDebito"].Value.ToString().ObterValorOuPadrao(0))
+                .FirstOrDefault();  
+        }
+        private void dtgGastos_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            dtgGastos_CellContentClick(sender, e);
+        }
     }
 }
