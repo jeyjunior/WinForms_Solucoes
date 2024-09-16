@@ -44,13 +44,13 @@ namespace WFBaseDados.Repositorios
             //    where += ((where.Length > 0) ? "AND " : "") + "WFRegistroDebito.DataDebito = @DataDebito ";
 
             if(parametro.Valor >= 0)
-                where += ((where.Length > 0) ? "AND " : "") + "WFRegistroDebito.Valor = @Valor ";
+                where += ((where.Length > 0) ? " AND " : "") + "WFRegistroDebito.Valor = @Valor ";
 
             if (parametro.FK_WFCategoria > 0)
-                where += ((where.Length > 0) ? "AND " : "") + "WFCategoria.PK_WFCategoria = @FK_WFCategoria ";
+                where += ((where.Length > 0) ? " AND " : "") + "WFCategoria.PK_WFCategoria = @FK_WFCategoria ";
 
             if (parametro.FK_WFMetodoPagamento > 0)
-                where += ((where.Length > 0) ? "AND " : "") + "WFMetodoPagamento.PK_WFMetodoPagamento = @FK_WFMetodoPagamento ";
+                where += ((where.Length > 0) ? " AND " : "") + "WFMetodoPagamento.PK_WFMetodoPagamento = @FK_WFMetodoPagamento ";
 
             Pesquisar:;
             string sql = SQL + ((where.Length > 0) ? " WHERE " : "") + where;

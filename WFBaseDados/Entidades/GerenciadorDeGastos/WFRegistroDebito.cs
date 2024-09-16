@@ -12,7 +12,7 @@ namespace WFBaseDados.Entidades
     [Table("WFRegistroDebitos")]
     public class WFRegistroDebito
     {
-        [Key]
+        [Key, Editable(false)]
         public int PK_WFRegistroDebito { get; set; }
         public string Nome { get; set; }
         public DateTime DataDebito { get; set; }
@@ -24,7 +24,6 @@ namespace WFBaseDados.Entidades
         public WFCategoria WFCategoria { get; set; }
         [Editable(false)]
         public WFMetodoPagamento WFMetodoPagamento { get; set; }
-
         [Editable(false)]
         public Validacao Validacao { get; set; }
     }

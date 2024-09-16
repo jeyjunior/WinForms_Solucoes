@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using WFBase.Base;
@@ -186,25 +187,41 @@ namespace WFBaseDados.Repositorios
                     validacao = new Validacao();
 
                 var tipo = typeof(T);
-                var propriedades = tipo.GetProperties().Where(p => !p.Name.StartsWith("PK") && !p.Name.StartsWith("Validacao")); 
+                var editableAttributeType = typeof(EditableAttribute);
+                var keyAttributeType = typeof(KeyAttribute);
+
+                var propriedades = tipo.GetProperties()
+                    .Where(prop => !prop.GetCustomAttributes(editableAttributeType, true).Any() && !prop.GetCustomAttributes(keyAttributeType, true)
+                    .OfType<EditableAttribute>()
+                    .Any(att => att.AllowEdit))
+                    .ToList();
+
+                var pk_Coluna = tipo.GetProperties().Where(i => i.Name.StartsWith("PK")).FirstOrDefault().Name;
                 var colunas = string.Join(", ", propriedades.Select(p => p.Name));
                 var valores = string.Join(", ", propriedades.Select(p => "@" + p.Name));
 
-                var pkProperty = tipo.GetProperties().FirstOrDefault(p => p.Name.StartsWith("PK"));
-                if (pkProperty == null)
+                if (propriedades == null)
+                {
+                    validacao.AddErro("Nenhum propriedade encontrada.");
+                    goto Sair;
+                }
+                else if(pk_Coluna == null)
                 {
                     validacao.AddErro("Não foi possível encontrar a propriedade de chave primária.");
                     goto Sair;
                 }
-                var pkColumn = pkProperty.Name;
+                else if(colunas.ObterValorOuPadrao("").Trim() == "" || valores.ObterValorOuPadrao("").Trim() == "")
+                {
+                    validacao.AddErro("Nenhuma coluna ou valor encontrado.");
+                    goto Sair;
+                }
 
                 var query = $@"
                         INSERT INTO {tipo.Name} ({colunas}) 
-                        OUTPUT INSERTED.{pkColumn}
+                        OUTPUT INSERTED.{pk_Coluna}
                         VALUES ({valores})";
 
                 var parametros = propriedades.ToDictionary(p => "@" + p.Name, p => p.GetValue(entidade));
-
                 idInserido = ExecutarComando(query, parametros, validacao);
             }
             catch (Exception ex)
@@ -218,5 +235,68 @@ namespace WFBaseDados.Repositorios
         Sair:;
             return idInserido;
         }
+        public virtual int Atualizar(T entidade, Validacao validacao = null)
+        {
+            int linhasAfetadas = 0;
+
+            if (entidade == null)
+            {
+                validacao?.AddErro("Obrigatório informar o tipo da entidade.");
+                return 0;
+            }
+
+            try
+            {
+                if (validacao == null)
+                    validacao = new Validacao();
+
+                var tipo = typeof(T);
+                var editableAttributeType = typeof(EditableAttribute);
+                var keyAttributeType = typeof(KeyAttribute);
+
+                var propriedades = tipo.GetProperties()
+                    .Where(prop => !prop.GetCustomAttributes(editableAttributeType, true).Any() && !prop.GetCustomAttributes(keyAttributeType, true)
+                    .OfType<EditableAttribute>()
+                    .Any(att => att.AllowEdit))
+                    .ToList();
+
+                var pk_Coluna = tipo.GetProperties().Where(i => i.Name.StartsWith("PK")).FirstOrDefault();
+                var colunas = string.Join(", ", propriedades.Select(p => p.Name + " = @" + p.Name));
+
+                if (propriedades == null)
+                {
+                    validacao.AddErro("Nenhum propriedade encontrada.");
+                    goto Sair;
+                }
+                else if (pk_Coluna == null)
+                {
+                    validacao.AddErro("Não foi possível encontrar a propriedade de chave primária.");
+                    goto Sair;
+                }
+                else if (colunas.ObterValorOuPadrao("").Trim() == "")
+                {
+                    validacao.AddErro("Nenhuma coluna ou valor encontrado.");
+                    goto Sair;
+                }
+
+                var query = $@"
+                UPDATE {tipo.Name}
+                SET {colunas} 
+                WHERE {pk_Coluna.Name} = @{pk_Coluna.Name}";
+
+                var parametros = propriedades.ToDictionary(p => "@" + p.Name, p => p.GetValue(entidade).ToString().ObterValorOuPadrao("").Trim());
+                parametros.Add("@" + pk_Coluna.Name, pk_Coluna.GetValue(entidade).ToString().ObterValorOuPadrao("").Trim());
+
+                linhasAfetadas = ExecutarComando(query, parametros, validacao);
+            }
+            catch (Exception ex)
+            {
+                validacao?.AddErro(ex.Message);
+            }
+
+        Sair:;
+            return linhasAfetadas;
+        }
+
     }
 }

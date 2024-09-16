@@ -13,5 +13,6 @@ namespace WFBaseDados.Interfaces
         IEnumerable<T> ObterLista(Validacao validacao = null);
         IEnumerable<T> ObterLista(string where, object parametros, Validacao validacao = null);
         int Adicionar(T entidade, Validacao validacao = null);
+        int Atualizar(T entidade, Validacao validacao = null);
     }
 }

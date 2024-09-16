@@ -85,6 +85,7 @@
             this.dtgGastos.TabIndex = 0;
             this.dtgGastos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgGastos_CellContentClick);
             this.dtgGastos.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgGastos_CellContentDoubleClick);
+            this.dtgGastos.SelectionChanged += new System.EventHandler(this.dtgGastos_SelectionChanged);
             // 
             // colPK_WFRegistroDebito
             // 

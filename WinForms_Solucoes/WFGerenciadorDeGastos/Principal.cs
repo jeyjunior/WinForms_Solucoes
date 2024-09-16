@@ -137,12 +137,14 @@ namespace WFGerenciadorDeGastos
                     FK_WFCategoria = (int)cboCategoria.SelectedValue > 0 ? (int)cboCategoria.SelectedValue : (int?)null,
                     FK_WFMetodoPagamento = (int)cboPagamento.SelectedValue > 0 ? (int)cboPagamento.SelectedValue : (int?)null,
                     Valor = txtValor.Text.ObterValorOuPadrao(0m),
-                    DataDebito = DateTime.Today
+                    DataDebito = DateTime.Today,
+                    PK_WFRegistroDebito = PK_WFRegistroDebitoSelecionado,
                 };
 
                 // Validação
 
-                var ret = wFRegistroDebitosRepository.Adicionar(wFRegistrarDespesa);
+                var ret = wFRegistroDebitosRepository.Atualizar(wFRegistrarDespesa);
+                //var ret = wFRegistroDebitosRepository.Adicionar(wFRegistrarDespesa);
 
                 Pesquisar();
             }
@@ -178,6 +180,9 @@ namespace WFGerenciadorDeGastos
             }).ToList();
 
             dtgGastos.DataSource = resultado.ToList();
+
+            if(dtgGastos.Rows.Count > 0)
+                dtgGastos.Rows[0].Selected = true;
         }
         private void HabilitarOperacao(Operacao operacao)
         {
@@ -185,9 +190,9 @@ namespace WFGerenciadorDeGastos
             switch (operacao)
             {
                 case Operacao.Visualizar:
-                    this.btnExcluir.Enabled = true;
                     this.btnPesquisar.Enabled = true;
-                    this.btnAlterar.Enabled = true;
+                    this.btnExcluir.Enabled = (dtgGastos.Rows.Count > 0);
+                    this.btnAlterar.Enabled = (dtgGastos.Rows.Count > 0);
                     this.btnRegistrar.Enabled = true;
 
                     this.btnAlterar.Text = "Alterar";
@@ -214,6 +219,16 @@ namespace WFGerenciadorDeGastos
         }
         private void dtgGastos_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (PK_WFRegistroDebitoSelecionado <= 0)
+                return;
+        }
+        private void dtgGastos_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            dtgGastos_CellContentClick(sender, e);
+        }
+
+        private void dtgGastos_SelectionChanged(object sender, EventArgs e)
+        {
             if (dtgGastos.Rows.Count <= 0)
                 return;
 
@@ -221,11 +236,7 @@ namespace WFGerenciadorDeGastos
                 .SelectedRows
                 .OfType<DataGridViewRow>()
                 .Select(i => i.Cells["colPK_WFRegistroDebito"].Value.ToString().ObterValorOuPadrao(0))
-                .FirstOrDefault();  
-        }
-        private void dtgGastos_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            dtgGastos_CellContentClick(sender, e);
+                .FirstOrDefault();
         }
     }
 }
