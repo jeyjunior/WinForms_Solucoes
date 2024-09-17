@@ -205,12 +205,15 @@ namespace WFBaseDados.Repositorios
         }
         public virtual IEnumerable<T> ObterLista(string where, object parametros, Validacao validacao = null)
         {
-            string query = $"SELECT * FROM {typeof(T).Name} ";
+            var query = new StringBuilder();
+
+            query.AppendLine($"SELECT   *");
+            query.AppendLine($"FROM     {typeof(T).Name}");
 
             if (where.ObterValorOuPadrao("").Trim() != "")
-                query += "WHERE " + where;
+                query.AppendLine($"WHERE    {where}");
 
-            return ExecutarConsulta(query, parametros, validacao);
+            return ExecutarConsulta(query.ToString(), parametros, validacao);
         }
         public virtual IEnumerable<T> ObterLista(object parametros, Validacao validacao = null)
         {
@@ -262,13 +265,14 @@ namespace WFBaseDados.Repositorios
                     goto Sair;
                 }
 
-                var query = $@"
-                        INSERT INTO {tipo.Name} ({colunas}) 
-                        OUTPUT INSERTED.{pk_Coluna}
-                        VALUES ({valores})";
+                var query = new StringBuilder();
+
+                query.AppendLine($"INSERT   INTO {tipo.Name} ({colunas})");
+                query.AppendLine($"         OUTPUT INSERTED.{pk_Coluna}");
+                query.AppendLine($"VALUES   ({valores})");
 
                 var parametros = propriedades.ToDictionary(p => "@" + p.Name, p => p.GetValue(entidade));
-                idInserido = ExecutarComando(query, parametros, validacao);
+                idInserido = ExecutarComando(query.ToString(), parametros, validacao);
             }
             catch (Exception ex)
             {
@@ -338,12 +342,13 @@ namespace WFBaseDados.Repositorios
 
                 parametros.Add("@" + pk_Coluna.Name, pk_Coluna.GetValue(entidade).ToString().ObterValorOuPadrao("").Trim());
 
-                var query = $@"
-                UPDATE {tipo.Name}
-                SET {colunas} 
-                WHERE {pk_Coluna.Name} = @{pk_Coluna.Name}";
+                var query = new StringBuilder();
 
-                linhasAfetadas = ExecutarComando(query, parametros, validacao);
+                query.AppendLine($"UPDATE   {tipo.Name}");
+                query.AppendLine($"SET      {colunas}");
+                query.AppendLine($"WHERE    {pk_Coluna.Name} = @{pk_Coluna.Name}");
+
+                linhasAfetadas = ExecutarComando(query.ToString(), parametros, validacao);
             }
             catch (Exception ex)
             {
@@ -353,6 +358,33 @@ namespace WFBaseDados.Repositorios
         Sair:;
             return linhasAfetadas;
         }
+        public virtual int Excluir(int id, Validacao validacao = null)
+        {
+            int linhasAfetadas = 0;
 
+            try
+            {
+                if (validacao == null)
+                    validacao = new Validacao();
+
+                var tipo = typeof(T);
+                var pk_Coluna = tipo.GetProperties().Where(i => i.Name.StartsWith("PK")).FirstOrDefault();
+
+                var query = new StringBuilder();
+
+                query.AppendLine($"DELETE   FROM   {tipo.Name}");
+                query.AppendLine($"WHERE    {pk_Coluna.Name} = {id}");
+
+                var parametros = new Dictionary<string, object>();
+                parametros.Add($"@{pk_Coluna.Name}", id);
+                linhasAfetadas = ExecutarComando(query.ToString(), parametros, validacao);
+            }
+            catch (Exception ex)
+            {
+                validacao?.AddErro(ex.Message);
+            }
+
+            return linhasAfetadas;
+        }
     }
 }

@@ -69,7 +69,16 @@ namespace WFGerenciadorDeGastos
         }
         private void btnExcluir_Click(object sender, EventArgs e)
         {
+            try
+            {
+                wFRegistroDebitosRepository.Excluir(PK_WFRegistroDebitoSelecionado);
+                Limpar();
+                Pesquisar();
+            }
+            catch 
+            {
 
+            }
         }
         private void btnAlterar_Click(object sender, EventArgs e)
         {
@@ -99,13 +108,40 @@ namespace WFGerenciadorDeGastos
                 HabilitarOperacao(Operacao.Visualizar);
             }
         }
+        private void dtgGastos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (PK_WFRegistroDebitoSelecionado <= 0)
+                return;
+        }
+        private void dtgGastos_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            dtgGastos_CellContentClick(sender, e);
+        }
+        private void dtgGastos_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dtgGastos.Rows.Count <= 0)
+                return;
+
+            PK_WFRegistroDebitoSelecionado = dtgGastos
+                .SelectedRows
+                .OfType<DataGridViewRow>()
+                .Select(i => i.Cells["colPK_WFRegistroDebito"].Value.ToString().ObterValorOuPadrao(0))
+                .FirstOrDefault();
+        }
         #endregion
 
         #region Métodos
         private void CarregarDropDown()
         {
-            CarregarCategoria();
-            CarregarMetodoPagamento();
+            try
+            {
+                CarregarCategoria();
+                CarregarMetodoPagamento();
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
         private void CarregarCategoria()
         {
@@ -151,6 +187,7 @@ namespace WFGerenciadorDeGastos
                     var ret = wFRegistroDebitosRepository.Adicionar(wFRegistrarDespesa);
                 }
 
+                Limpar();
                 Pesquisar();
             }
             catch (Exception ex)
@@ -160,19 +197,25 @@ namespace WFGerenciadorDeGastos
         }
         private void Pesquisar()
         {
-            var parametro = new WFRegistroDebitoRequest
+            try
             {
-                Nome = txtDespesa.Text.ObterValorOuPadrao("").Trim(),
-                Valor = txtValor.Text.ObterValorOuPadrao(-1),
-                FK_WFCategoria = (int)cboCategoria.SelectedValue,
-                FK_WFMetodoPagamento = (int)cboPagamento.SelectedValue,
-            };
+                var parametro = new WFRegistroDebitoRequest
+                {
+                    Nome = txtDespesa.Text.ObterValorOuPadrao("").Trim(),
+                    Valor = txtValor.Text.ObterValorOuPadrao(-1),
+                    FK_WFCategoria = (int)cboCategoria.SelectedValue,
+                    FK_WFMetodoPagamento = (int)cboPagamento.SelectedValue,
+                };
 
-            wFRegistroDebitosCollection = wFRegistroDebitosRepository.ObterLista(parametro).ToList();
+                wFRegistroDebitosCollection = wFRegistroDebitosRepository.ObterLista(parametro).ToList();
 
-            BindPrincipal();
+                BindPrincipal();
+                HabilitarOperacao(Operacao.Visualizar);
+            }
+            catch (Exception ex)
+            {
 
-            HabilitarOperacao(Operacao.Visualizar);
+            }
         }
         private void BindPrincipal()
         {
@@ -216,34 +259,15 @@ namespace WFGerenciadorDeGastos
                     break;
             }
         }
-        #endregion
         private void Limpar()
         {
             txtDespesa.Text = "";
             txtValor.Text = "";
             cboCategoria.SelectedValue = -1;
             cboPagamento.SelectedValue = -1;
-        }
-        private void dtgGastos_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (PK_WFRegistroDebitoSelecionado <= 0)
-                return;
-        }
-        private void dtgGastos_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            dtgGastos_CellContentClick(sender, e);
-        }
 
-        private void dtgGastos_SelectionChanged(object sender, EventArgs e)
-        {
-            if (dtgGastos.Rows.Count <= 0)
-                return;
-
-            PK_WFRegistroDebitoSelecionado = dtgGastos
-                .SelectedRows
-                .OfType<DataGridViewRow>()
-                .Select(i => i.Cells["colPK_WFRegistroDebito"].Value.ToString().ObterValorOuPadrao(0))
-                .FirstOrDefault();
+            txtDespesa.Focus();
         }
+        #endregion
     }
 }
