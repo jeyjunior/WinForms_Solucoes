@@ -69,11 +69,17 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Telas\CadastrarDespesa.cs">
+    <Compile Include="Telas\CadastroMetodoPagamento.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Telas\CadastrarDespesa.Designer.cs">
-      <DependentUpon>CadastrarDespesa.cs</DependentUpon>
+    <Compile Include="Telas\CadastroMetodoPagamento.Designer.cs">
+      <DependentUpon>CadastroMetodoPagamento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Telas\CadastroCategoria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Telas\CadastroCategoria.Designer.cs">
+      <DependentUpon>CadastroCategoria.cs</DependentUpon>
     </Compile>
     <Compile Include="Telas\RegistroDespesas.cs">
       <SubType>Form</SubType>
@@ -94,8 +100,11 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Telas\CadastrarDespesa.resx">
-      <DependentUpon>CadastrarDespesa.cs</DependentUpon>
+    <EmbeddedResource Include="Telas\CadastroMetodoPagamento.resx">
+      <DependentUpon>CadastroMetodoPagamento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Telas\CadastroCategoria.resx">
+      <DependentUpon>CadastroCategoria.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Telas\RegistroDespesas.resx">
       <DependentUpon>RegistroDespesas.cs</DependentUpon>

@@ -128,6 +128,10 @@ namespace WFGerenciadorDeGastos
                 .Select(i => i.Cells["colPK_WFRegistroDebito"].Value.ToString().ObterValorOuPadrao(0))
                 .FirstOrDefault();
         }
+        private void tbnLimpar_Click(object sender, EventArgs e)
+        {
+            Limpar();
+        }
         #endregion
 
         #region Métodos

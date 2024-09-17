@@ -51,6 +51,7 @@
             this.btnPesquisar = new System.Windows.Forms.Button();
             this.btnExcluir = new System.Windows.Forms.Button();
             this.btnAlterar = new System.Windows.Forms.Button();
+            this.tbnLimpar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dtgGastos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -281,11 +282,23 @@
             this.btnAlterar.UseVisualStyleBackColor = true;
             this.btnAlterar.Click += new System.EventHandler(this.btnAlterar_Click);
             // 
+            // tbnLimpar
+            // 
+            this.tbnLimpar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.tbnLimpar.Location = new System.Drawing.Point(281, 70);
+            this.tbnLimpar.Name = "tbnLimpar";
+            this.tbnLimpar.Size = new System.Drawing.Size(89, 34);
+            this.tbnLimpar.TabIndex = 16;
+            this.tbnLimpar.Text = "Limpar";
+            this.tbnLimpar.UseVisualStyleBackColor = true;
+            this.tbnLimpar.Click += new System.EventHandler(this.tbnLimpar_Click);
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(667, 383);
+            this.Controls.Add(this.tbnLimpar);
             this.Controls.Add(this.lblValor);
             this.Controls.Add(this.txtValor);
             this.Controls.Add(this.lblStatus);
@@ -337,6 +350,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colPagamento;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDataDespesa;
         private System.Windows.Forms.DataGridViewTextBoxColumn colValor;
+        private System.Windows.Forms.Button tbnLimpar;
     }
 }
 

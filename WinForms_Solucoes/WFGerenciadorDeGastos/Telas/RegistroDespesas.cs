@@ -24,7 +24,7 @@ namespace WFGerenciadorDeGastos.Telas
 
         private void btnAdicionar_Click(object sender, EventArgs e)
         {
-            var cadastrarDespesa = new CadastrarDespesa();
+            var cadastrarDespesa = new CadastroCategoria();
             cadastrarDespesa.ShowDialog();
         }
     }

@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace WFGerenciadorDeGastos.Telas
 {
-    public partial class CadastrarDespesa : Form
+    public partial class CadastroCategoria : Form
     {
-        public CadastrarDespesa()
+        public CadastroCategoria()
         {
             InitializeComponent();
         }
