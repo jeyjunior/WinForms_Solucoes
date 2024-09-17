@@ -138,13 +138,18 @@ namespace WFGerenciadorDeGastos
                     FK_WFMetodoPagamento = (int)cboPagamento.SelectedValue > 0 ? (int)cboPagamento.SelectedValue : (int?)null,
                     Valor = txtValor.Text.ObterValorOuPadrao(0m),
                     DataDebito = DateTime.Today,
-                    PK_WFRegistroDebito = PK_WFRegistroDebitoSelecionado,
                 };
 
                 // Validação
-
-                var ret = wFRegistroDebitosRepository.Atualizar(wFRegistrarDespesa);
-                //var ret = wFRegistroDebitosRepository.Adicionar(wFRegistrarDespesa);
+                if(OperacaoAtual == Operacao.Alterar)
+                {
+                    wFRegistrarDespesa.PK_WFRegistroDebito = PK_WFRegistroDebitoSelecionado;
+                    var ret = wFRegistroDebitosRepository.Atualizar(wFRegistrarDespesa);
+                }
+                else
+                {
+                    var ret = wFRegistroDebitosRepository.Adicionar(wFRegistrarDespesa);
+                }
 
                 Pesquisar();
             }
@@ -166,6 +171,8 @@ namespace WFGerenciadorDeGastos
             wFRegistroDebitosCollection = wFRegistroDebitosRepository.ObterLista(parametro).ToList();
 
             BindPrincipal();
+
+            HabilitarOperacao(Operacao.Visualizar);
         }
         private void BindPrincipal()
         {

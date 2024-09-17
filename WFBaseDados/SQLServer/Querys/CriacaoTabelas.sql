@@ -17,7 +17,7 @@ CREATE TABLE WFMetodoPagamento (
 CREATE TABLE WFRegistroDebito (
     PK_WFRegistroDebito INT IDENTITY(1,1) PRIMARY KEY,
     Nome VARCHAR(255) NOT NULL,
-    DataDebito DATE NOT NULL,
+    DataDebito DATETIME NOT NULL,
     Valor DECIMAL(10, 2) NOT NULL,
     FK_WFCategoria INT,
     FK_WFMetodoPagamento INT,

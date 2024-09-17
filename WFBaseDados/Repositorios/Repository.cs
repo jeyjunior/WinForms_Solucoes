@@ -116,6 +116,52 @@ namespace WFBaseDados.Repositorios
 
             return ret;
         }
+        protected int ExecutarComando(string query, IDictionary<string, object> parametros, Validacao validacao = null)
+        {
+            int ret = 0;
+
+            try
+            {
+                if (validacao == null)
+                    validacao = new Validacao();
+
+                using (SqlConnection connection = new SqlConnection(conexao))
+                {
+                    connection.Open();
+
+                    using (SqlTransaction transaction = connection.BeginTransaction())
+                    {
+                        try
+                        {
+                            using (SqlCommand command = new SqlCommand(query, connection, transaction))
+                            {
+                                foreach (var parametro in parametros)
+                                {
+                                    command.Parameters.AddWithValue(parametro.Key, parametro.Value ?? DBNull.Value);
+                                }
+
+                                ret = command.ExecuteNonQuery(); // Use ExecuteNonQuery for UPDATE/INSERT/DELETE
+
+                                transaction.Commit();
+                            }
+                        }
+                        catch (SqlException sqlEx)
+                        {
+                            transaction.Rollback();
+                            validacao.AddErro(sqlEx.Message);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                validacao.AddErro(ex.Message);
+            }
+
+            return ret;
+        }
+
+
         public virtual T Obter(int id, Validacao validacao = null)
         {
             if (validacao == null)
@@ -261,7 +307,6 @@ namespace WFBaseDados.Repositorios
                     .ToList();
 
                 var pk_Coluna = tipo.GetProperties().Where(i => i.Name.StartsWith("PK")).FirstOrDefault();
-                var colunas = string.Join(", ", propriedades.Select(p => p.Name + " = @" + p.Name));
 
                 if (propriedades == null)
                 {
@@ -273,19 +318,30 @@ namespace WFBaseDados.Repositorios
                     validacao.AddErro("Não foi possível encontrar a propriedade de chave primária.");
                     goto Sair;
                 }
-                else if (colunas.ObterValorOuPadrao("").Trim() == "")
+                var parametros = new Dictionary<string, object>();
+
+                string colunas = "";
+
+                foreach (PropertyInfo p in propriedades)
                 {
-                    validacao.AddErro("Nenhuma coluna ou valor encontrado.");
-                    goto Sair;
+                    string nome = "@" + p.Name;
+                    object valor = null;
+
+                    if (p.GetValue(entidade) != null)
+                    {
+                        valor = p.GetValue(entidade);
+                        parametros.Add(nome, valor);
+
+                        colunas += (colunas.Length > 0 ? ", " : "") + $"{p.Name} = @{p.Name}";
+                    }
                 }
+
+                parametros.Add("@" + pk_Coluna.Name, pk_Coluna.GetValue(entidade).ToString().ObterValorOuPadrao("").Trim());
 
                 var query = $@"
                 UPDATE {tipo.Name}
                 SET {colunas} 
                 WHERE {pk_Coluna.Name} = @{pk_Coluna.Name}";
-
-                var parametros = propriedades.ToDictionary(p => "@" + p.Name, p => p.GetValue(entidade).ToString().ObterValorOuPadrao("").Trim());
-                parametros.Add("@" + pk_Coluna.Name, pk_Coluna.GetValue(entidade).ToString().ObterValorOuPadrao("").Trim());
 
                 linhasAfetadas = ExecutarComando(query, parametros, validacao);
             }
