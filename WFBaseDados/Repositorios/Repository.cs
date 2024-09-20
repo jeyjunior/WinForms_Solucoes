@@ -207,11 +207,11 @@ namespace WFBaseDados.Repositorios
         {
             var query = new StringBuilder();
 
-            query.AppendLine($"SELECT   *");
-            query.AppendLine($"FROM     {typeof(T).Name}");
+            query.AppendLine($" SELECT   *");
+            query.AppendLine($" FROM     {typeof(T).Name}");
 
             if (where.ObterValorOuPadrao("").Trim() != "")
-                query.AppendLine($"WHERE    {where}");
+                query.AppendLine($" WHERE    {where}");
 
             return ExecutarConsulta(query.ToString(), parametros, validacao);
         }
@@ -267,9 +267,9 @@ namespace WFBaseDados.Repositorios
 
                 var query = new StringBuilder();
 
-                query.AppendLine($"INSERT   INTO {tipo.Name} ({colunas})");
-                query.AppendLine($"         OUTPUT INSERTED.{pk_Coluna}");
-                query.AppendLine($"VALUES   ({valores})");
+                query.AppendLine($" INSERT   INTO {tipo.Name} ({colunas})");
+                query.AppendLine($"          OUTPUT INSERTED.{pk_Coluna}");
+                query.AppendLine($" VALUES   ({valores})");
 
                 var parametros = propriedades.ToDictionary(p => "@" + p.Name, p => p.GetValue(entidade));
                 idInserido = ExecutarComando(query.ToString(), parametros, validacao);
@@ -344,9 +344,9 @@ namespace WFBaseDados.Repositorios
 
                 var query = new StringBuilder();
 
-                query.AppendLine($"UPDATE   {tipo.Name}");
-                query.AppendLine($"SET      {colunas}");
-                query.AppendLine($"WHERE    {pk_Coluna.Name} = @{pk_Coluna.Name}");
+                query.AppendLine($" UPDATE   {tipo.Name}");
+                query.AppendLine($" SET      {colunas}");
+                query.AppendLine($" WHERE    {pk_Coluna.Name} = @{pk_Coluna.Name}");
 
                 linhasAfetadas = ExecutarComando(query.ToString(), parametros, validacao);
             }
@@ -372,8 +372,8 @@ namespace WFBaseDados.Repositorios
 
                 var query = new StringBuilder();
 
-                query.AppendLine($"DELETE   FROM   {tipo.Name}");
-                query.AppendLine($"WHERE    {pk_Coluna.Name} = {id}");
+                query.AppendLine($" DELETE   FROM   {tipo.Name}");
+                query.AppendLine($" WHERE    {pk_Coluna.Name} = {id}");
 
                 var parametros = new Dictionary<string, object>();
                 parametros.Add($"@{pk_Coluna.Name}", id);

@@ -51,17 +51,19 @@ namespace WFGerenciadorDeGastos
 
             HabilitarOperacao(Operacao.Visualizar);
         }
-        private void btnRegistrar_Click(object sender, EventArgs e)
-        {
-            RegistrarDespesa();
-        }
         private void btnAddPagamento_Click(object sender, EventArgs e)
         {
-
+            var cadastroMetodoPagamento = new CadastroMetodoPagamento();
+            cadastroMetodoPagamento.ShowDialog();
         }
         private void btnAddCategoria_Click(object sender, EventArgs e)
         {
-
+            var cadastroCategoria = new CadastroCategoria();
+            cadastroCategoria.ShowDialog();
+        }
+        private void btnSalvar_Click(object sender, EventArgs e)
+        {
+            RegistrarDespesa();
         }
         private void btnPesquisar_Click(object sender, EventArgs e)
         {
@@ -214,6 +216,7 @@ namespace WFGerenciadorDeGastos
                 wFRegistroDebitosCollection = wFRegistroDebitosRepository.ObterLista(parametro).ToList();
 
                 BindPrincipal();
+                AtualizarQuantidade();
                 HabilitarOperacao(Operacao.Visualizar);
             }
             catch (Exception ex)
@@ -247,7 +250,7 @@ namespace WFGerenciadorDeGastos
                     this.btnPesquisar.Enabled = true;
                     this.btnExcluir.Enabled = (dtgGastos.Rows.Count > 0);
                     this.btnAlterar.Enabled = (dtgGastos.Rows.Count > 0);
-                    this.btnRegistrar.Enabled = true;
+                    this.btnSalvar.Enabled = true;
 
                     this.btnAlterar.Text = "Alterar";
                     break;
@@ -255,7 +258,7 @@ namespace WFGerenciadorDeGastos
                     this.btnExcluir.Enabled = false;
                     this.btnPesquisar.Enabled = false;
                     this.btnAlterar.Enabled = true;
-                    this.btnRegistrar.Enabled = true;
+                    this.btnSalvar.Enabled = true;
 
                     this.btnAlterar.Text = "Cancelar";
                     break;
@@ -271,6 +274,10 @@ namespace WFGerenciadorDeGastos
             cboPagamento.SelectedValue = -1;
 
             txtDespesa.Focus();
+        }
+        private void AtualizarQuantidade()
+        {
+            lblStatus.Text = "Total: " + dtgGastos.RowCount.ToString("N0");
         }
         #endregion
     }

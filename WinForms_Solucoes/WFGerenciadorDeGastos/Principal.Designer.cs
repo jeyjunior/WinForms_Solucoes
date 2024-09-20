@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dtgGastos = new System.Windows.Forms.DataGridView();
             this.colPK_WFRegistroDebito = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDespesa = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -36,7 +36,7 @@
             this.colPagamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDataDespesa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colValor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnRegistrar = new System.Windows.Forms.Button();
+            this.btnSalvar = new System.Windows.Forms.Button();
             this.cboPagamento = new System.Windows.Forms.ComboBox();
             this.btnAddPagamento = new System.Windows.Forms.Button();
             this.btnAddCategoria = new System.Windows.Forms.Button();
@@ -45,13 +45,13 @@
             this.lblDespesa = new System.Windows.Forms.Label();
             this.lblCategoria = new System.Windows.Forms.Label();
             this.lblPagamento = new System.Windows.Forms.Label();
-            this.lblStatus = new System.Windows.Forms.Label();
             this.lblValor = new System.Windows.Forms.Label();
             this.txtValor = new System.Windows.Forms.TextBox();
             this.btnPesquisar = new System.Windows.Forms.Button();
             this.btnExcluir = new System.Windows.Forms.Button();
             this.btnAlterar = new System.Windows.Forms.Button();
             this.tbnLimpar = new System.Windows.Forms.Button();
+            this.lblStatus = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dtgGastos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,14 +60,14 @@
             this.dtgGastos.AllowUserToAddRows = false;
             this.dtgGastos.AllowUserToResizeColumns = false;
             this.dtgGastos.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dtgGastos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dtgGastos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dtgGastos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgGastos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colPK_WFRegistroDebito,
@@ -136,16 +136,16 @@
             this.colValor.HeaderText = "Valor";
             this.colValor.Name = "colValor";
             // 
-            // btnRegistrar
+            // btnSalvar
             // 
-            this.btnRegistrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRegistrar.Location = new System.Drawing.Point(471, 69);
-            this.btnRegistrar.Name = "btnRegistrar";
-            this.btnRegistrar.Size = new System.Drawing.Size(89, 34);
-            this.btnRegistrar.TabIndex = 1;
-            this.btnRegistrar.Text = "Registrar";
-            this.btnRegistrar.UseVisualStyleBackColor = true;
-            this.btnRegistrar.Click += new System.EventHandler(this.btnRegistrar_Click);
+            this.btnSalvar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSalvar.Location = new System.Drawing.Point(471, 69);
+            this.btnSalvar.Name = "btnSalvar";
+            this.btnSalvar.Size = new System.Drawing.Size(89, 34);
+            this.btnSalvar.TabIndex = 1;
+            this.btnSalvar.Text = "Salvar";
+            this.btnSalvar.UseVisualStyleBackColor = true;
+            this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
             // 
             // cboPagamento
             // 
@@ -222,16 +222,6 @@
             this.lblPagamento.TabIndex = 9;
             this.lblPagamento.Text = "Pagamento";
             // 
-            // lblStatus
-            // 
-            this.lblStatus.BackColor = System.Drawing.Color.SteelBlue;
-            this.lblStatus.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.lblStatus.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblStatus.Location = new System.Drawing.Point(0, 370);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(667, 13);
-            this.lblStatus.TabIndex = 10;
-            // 
             // lblValor
             // 
             this.lblValor.AutoSize = true;
@@ -293,15 +283,28 @@
             this.tbnLimpar.UseVisualStyleBackColor = true;
             this.tbnLimpar.Click += new System.EventHandler(this.tbnLimpar_Click);
             // 
+            // lblStatus
+            // 
+            this.lblStatus.BackColor = System.Drawing.Color.SteelBlue;
+            this.lblStatus.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStatus.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lblStatus.Location = new System.Drawing.Point(0, 367);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Padding = new System.Windows.Forms.Padding(10, 0, 5, 0);
+            this.lblStatus.Size = new System.Drawing.Size(667, 16);
+            this.lblStatus.TabIndex = 17;
+            this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(667, 383);
+            this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.tbnLimpar);
             this.Controls.Add(this.lblValor);
             this.Controls.Add(this.txtValor);
-            this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.lblPagamento);
             this.Controls.Add(this.lblCategoria);
             this.Controls.Add(this.lblDespesa);
@@ -314,7 +317,7 @@
             this.Controls.Add(this.btnAlterar);
             this.Controls.Add(this.btnExcluir);
             this.Controls.Add(this.btnPesquisar);
-            this.Controls.Add(this.btnRegistrar);
+            this.Controls.Add(this.btnSalvar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Principal";
             this.ShowIcon = false;
@@ -329,7 +332,7 @@
 
         #endregion
         private System.Windows.Forms.DataGridView dtgGastos;
-        private System.Windows.Forms.Button btnRegistrar;
+        private System.Windows.Forms.Button btnSalvar;
         private System.Windows.Forms.ComboBox cboPagamento;
         private System.Windows.Forms.Button btnAddPagamento;
         private System.Windows.Forms.Button btnAddCategoria;
@@ -338,7 +341,6 @@
         private System.Windows.Forms.Label lblDespesa;
         private System.Windows.Forms.Label lblCategoria;
         private System.Windows.Forms.Label lblPagamento;
-        private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.Label lblValor;
         private System.Windows.Forms.TextBox txtValor;
         private System.Windows.Forms.Button btnPesquisar;
@@ -351,6 +353,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colDataDespesa;
         private System.Windows.Forms.DataGridViewTextBoxColumn colValor;
         private System.Windows.Forms.Button tbnLimpar;
+        private System.Windows.Forms.Label lblStatus;
     }
 }
 

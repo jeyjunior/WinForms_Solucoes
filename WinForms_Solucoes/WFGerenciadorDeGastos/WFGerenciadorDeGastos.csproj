@@ -81,12 +81,6 @@
     <Compile Include="Telas\CadastroCategoria.Designer.cs">
       <DependentUpon>CadastroCategoria.cs</DependentUpon>
     </Compile>
-    <Compile Include="Telas\RegistroDespesas.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Telas\RegistroDespesas.Designer.cs">
-      <DependentUpon>RegistroDespesas.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Principal.resx">
       <DependentUpon>Principal.cs</DependentUpon>
     </EmbeddedResource>
@@ -100,14 +94,11 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Telas\CadastroMetodoPagamento.resx">
-      <DependentUpon>CadastroMetodoPagamento.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Telas\CadastroCategoria.resx">
       <DependentUpon>CadastroCategoria.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Telas\RegistroDespesas.resx">
-      <DependentUpon>RegistroDespesas.cs</DependentUpon>
+    <EmbeddedResource Include="Telas\CadastroMetodoPagamento.resx">
+      <DependentUpon>CadastroMetodoPagamento.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
