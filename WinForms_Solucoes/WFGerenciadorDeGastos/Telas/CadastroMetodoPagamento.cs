@@ -22,9 +22,12 @@ namespace WFGerenciadorDeGastos.Telas
         #region Interfaces
         private readonly IWFMetodoPagamentoRepository wFMetodoPagamentoRepository;
         #endregion
+
         #region Propriedades
         private IEnumerable<WFMetodoPagamento> wFMetodoPagamentoCollection;
         private Operacao OperacaoAtual;
+        private int PK_WFMetodoPagamentoSelecionado;
+        int index = 0;
         #endregion
 
         #region Construtor
@@ -52,12 +55,15 @@ namespace WFGerenciadorDeGastos.Telas
         {
             try
             {
+                HabilitarOperacao(Operacao.Visualizar);
+
                 var nome = txtPagamento.Text.ObterValorOuPadrao("").Trim();
 
                 wFMetodoPagamentoCollection = wFMetodoPagamentoRepository.ObterLista("Nome LIKE @Nome", new { Nome = $"%{nome}%" });
 
                 BindPrincipal();
                 AtualizarQuantidade();
+
             }
             catch (Exception ex)
             {
@@ -73,10 +79,29 @@ namespace WFGerenciadorDeGastos.Telas
                 
             }).ToList();
 
-            dtgPagamento.DataSource = resultado.ToList();
+            if (resultado.Count == 0) 
+            {
+                var lista = resultado.Select(i => new
+                {
+                    PK_WFMetodoPagamento = -1,
+                    Nome = "",
+                })
+                    .ToList();
+
+                dtgPagamento.DataSource = lista.ToList();
+            }
+            else
+            {
+                dtgPagamento.DataSource = resultado.ToList();
+            }
 
             if (dtgPagamento.Rows.Count > 0)
-                dtgPagamento.Rows[0].Selected = true;
+            {
+                if(index > 0)
+                    dtgPagamento.Rows[index].Selected = true;
+            }
+
+            index = -1;
         }
         private void AtualizarQuantidade()
         {
@@ -92,6 +117,7 @@ namespace WFGerenciadorDeGastos.Telas
                     this.btnExcluir.Enabled = (dtgPagamento.Rows.Count > 0);
                     this.btnAlterar.Enabled = (dtgPagamento.Rows.Count > 0);
                     this.btnSalvar.Enabled = true;
+                    this.btnLimpar.Enabled = true;
 
                     this.btnAlterar.Text = "Alterar";
                     break;
@@ -100,7 +126,7 @@ namespace WFGerenciadorDeGastos.Telas
                     this.btnPesquisar.Enabled = false;
                     this.btnAlterar.Enabled = true;
                     this.btnSalvar.Enabled = true;
-
+                    this.btnLimpar.Enabled = false;
                     this.btnAlterar.Text = "Cancelar";
                     break;
                 default:
@@ -113,5 +139,96 @@ namespace WFGerenciadorDeGastos.Telas
             txtPagamento.Focus();
         }
         #endregion
+
+
+        private void btnAlterar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if(OperacaoAtual != Operacao.Alterar)
+                {
+                    HabilitarOperacao(Operacao.Alterar);
+                    ObterIDSelecionado();
+                    txtPagamento.Text = dtgPagamento.Rows[index].Cells["colNome"].Value.ToString();
+                }
+                else
+                {
+                    Limpar();
+                    HabilitarOperacao(Operacao.Visualizar);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                HabilitarOperacao(Operacao.Visualizar);
+            }
+        }
+
+        private void ObterIDSelecionado()
+        {
+            index = dtgPagamento.SelectedRows[0].Index;
+
+            if (index < 0)
+                return;
+
+            PK_WFMetodoPagamentoSelecionado = dtgPagamento.Rows[index].Cells["colPK_WFMetodoPagamento"].Value.ToString().ObterValorOuPadrao(0);
+        }
+
+        private void btnExcluir_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ObterIDSelecionado();
+
+                wFMetodoPagamentoRepository.Excluir(PK_WFMetodoPagamentoSelecionado);
+                Limpar();
+                Pesquisar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnLimpar_Click(object sender, EventArgs e)
+        {
+            Limpar();
+            HabilitarOperacao(Operacao.Visualizar);
+        }
+
+        private void btnSalvar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if(txtPagamento.Text.ObterValorOuPadrao("").Trim() == "")
+                {
+                    MessageBox.Show("Campo obrigatório.");
+                    txtPagamento.Focus();
+                    return;
+                }
+
+                WFMetodoPagamento wFMetodoPagamento = new WFMetodoPagamento
+                {
+                    Nome = txtPagamento.Text.ObterValorOuPadrao(""),
+                };
+
+                if(OperacaoAtual == Operacao.Alterar)
+                {
+                    wFMetodoPagamento.PK_WFMetodoPagamento = PK_WFMetodoPagamentoSelecionado;
+                    var ret = wFMetodoPagamentoRepository.Atualizar(wFMetodoPagamento);
+                }
+                else
+                {
+                    var ret = wFMetodoPagamentoRepository.Adicionar(wFMetodoPagamento);
+                }
+
+                Limpar();
+                Pesquisar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

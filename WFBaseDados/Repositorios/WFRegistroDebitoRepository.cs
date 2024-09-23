@@ -29,7 +29,7 @@ namespace WFBaseDados.Repositorios
         }
 
         public IEnumerable<WFRegistroDebito> ObterLista(WFRegistroDebitoRequest parametro, Validacao validacao = null)
-            {
+        {
             var wFRegistroDebitoCollection = new List<WFRegistroDebito>();
 
             string where = "";

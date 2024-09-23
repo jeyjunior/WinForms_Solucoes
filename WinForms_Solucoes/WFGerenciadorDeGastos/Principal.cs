@@ -63,7 +63,7 @@ namespace WFGerenciadorDeGastos
         }
         private void btnSalvar_Click(object sender, EventArgs e)
         {
-            RegistrarDespesa();
+            Salvar();
         }
         private void btnPesquisar_Click(object sender, EventArgs e)
         {
@@ -169,7 +169,7 @@ namespace WFGerenciadorDeGastos
             cboPagamento.ValueMember = "PK_WFMetodoPagamento";
             cboPagamento.DataSource = wFMetodoPagamento.OrderBy(i => i.Nome).ToList();
         }
-        private void RegistrarDespesa()
+        private void Salvar()
         {
             try
             {
@@ -198,7 +198,7 @@ namespace WFGerenciadorDeGastos
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show(ex.Message);
             }
         }
         private void Pesquisar()

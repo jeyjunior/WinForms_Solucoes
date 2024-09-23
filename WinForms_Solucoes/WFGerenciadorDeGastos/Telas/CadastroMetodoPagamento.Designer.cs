@@ -56,6 +56,7 @@
             this.dtgPagamento.Location = new System.Drawing.Point(12, 93);
             this.dtgPagamento.Name = "dtgPagamento";
             this.dtgPagamento.RowHeadersVisible = false;
+            this.dtgPagamento.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dtgPagamento.Size = new System.Drawing.Size(308, 186);
             this.dtgPagamento.TabIndex = 0;
             // 
@@ -82,6 +83,7 @@
             this.btnSalvar.Size = new System.Drawing.Size(36, 36);
             this.btnSalvar.TabIndex = 3;
             this.btnSalvar.UseVisualStyleBackColor = true;
+            this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
             // 
             // btnPesquisar
             // 
@@ -103,6 +105,7 @@
             this.btnExcluir.Size = new System.Drawing.Size(36, 36);
             this.btnExcluir.TabIndex = 1;
             this.btnExcluir.UseVisualStyleBackColor = true;
+            this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
             // 
             // txtPagamento
             // 
@@ -130,6 +133,7 @@
             this.btnAlterar.Size = new System.Drawing.Size(36, 36);
             this.btnAlterar.TabIndex = 11;
             this.btnAlterar.UseVisualStyleBackColor = true;
+            this.btnAlterar.Click += new System.EventHandler(this.btnAlterar_Click);
             // 
             // btnLimpar
             // 
@@ -140,6 +144,7 @@
             this.btnLimpar.Size = new System.Drawing.Size(36, 36);
             this.btnLimpar.TabIndex = 12;
             this.btnLimpar.UseVisualStyleBackColor = true;
+            this.btnLimpar.Click += new System.EventHandler(this.btnLimpar_Click);
             // 
             // lblStatus
             // 
