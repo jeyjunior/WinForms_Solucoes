@@ -99,12 +99,6 @@
     <Compile Include="Repositorios\WFTesteRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WFBase\WFBase.csproj">
-      <Project>{5b5c496c-cecc-43bf-baef-f0ae3aba59ee}</Project>
-      <Name>WFBase</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
