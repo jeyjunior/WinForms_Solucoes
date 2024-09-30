@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WF.GerenciarDespesas", "WF.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WF.ControleDePonto", "WF.ControleDePonto", "{A5EE604E-C0F9-4AFB-B77F-47E7414BFBD3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WF.GerenciarDespesas.Application", "WF.GerenciarDespesas.Application\WF.GerenciarDespesas.Application.csproj", "{9E3CDB32-C09B-4D2E-92B7-B12616B399E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WF.GerenciarDespesas.Application", "WF.GerenciarDespesas.Application\WF.GerenciarDespesas.Application.csproj", "{9E3CDB32-C09B-4D2E-92B7-B12616B399E8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{72717E35-DB15-4A19-9973-B3EDD76281CF}"
 EndProject
@@ -49,6 +49,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utilities", "Utilities", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{E516F863-14CC-4EA0-A029-C565D96C880B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WF.Testes", "WF.Testes", "{81D7C3BF-DAF6-4D91-AB51-CB4510BACE07}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{9EB810C9-3C81-4161-9204-9FA1A7883CA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WF.Testes", "WF.Testes\WF.Testes.csproj", "{643E7113-D5E0-420D-B098-51B6F50BE3E5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DLLs", "DLLs", "{E9B478EE-04F4-424C-A866-BE75A47EC631}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\JJCore\JJCore.Infra.Data\bin\Debug\netstandard2.0\JJCore.Domain.dll = ..\..\JJCore\JJCore.Infra.Data\bin\Debug\netstandard2.0\JJCore.Domain.dll
+		..\..\JJCore\JJCore.Infra.Data\bin\Debug\netstandard2.0\JJCore.Infra.Data.dll = ..\..\JJCore\JJCore.Infra.Data\bin\Debug\netstandard2.0\JJCore.Infra.Data.dll
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +71,10 @@ Global
 		{9E3CDB32-C09B-4D2E-92B7-B12616B399E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E3CDB32-C09B-4D2E-92B7-B12616B399E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E3CDB32-C09B-4D2E-92B7-B12616B399E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{643E7113-D5E0-420D-B098-51B6F50BE3E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{643E7113-D5E0-420D-B098-51B6F50BE3E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{643E7113-D5E0-420D-B098-51B6F50BE3E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{643E7113-D5E0-420D-B098-51B6F50BE3E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -82,6 +98,9 @@ Global
 		{773B2A6D-3FF3-43B4-9EC3-B880417C6E8B} = {CBF80AC3-F2A3-4738-8E9F-CD10C66729F7}
 		{FA21AF70-3A70-4E7A-8151-DCADD0FD4A8A} = {CBF80AC3-F2A3-4738-8E9F-CD10C66729F7}
 		{E516F863-14CC-4EA0-A029-C565D96C880B} = {CBF80AC3-F2A3-4738-8E9F-CD10C66729F7}
+		{81D7C3BF-DAF6-4D91-AB51-CB4510BACE07} = {270FD780-CB0F-4ED2-B47A-A685ACDF72D5}
+		{9EB810C9-3C81-4161-9204-9FA1A7883CA3} = {81D7C3BF-DAF6-4D91-AB51-CB4510BACE07}
+		{643E7113-D5E0-420D-B098-51B6F50BE3E5} = {9EB810C9-3C81-4161-9204-9FA1A7883CA3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D1B34512-E7D1-4EF4-B54A-B3B7B2A384A9}
